@@ -1,17 +1,14 @@
 <template>
   <main>
-    <!-- Hero Section -->
     <section class="relative isolate">
-      <!-- Background -->
       <div class="absolute inset-x-0 top-0 h-[800px] -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">
         <div
-          class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-secondary to-primary opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]">
+          class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-secondary to-primary opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem] transition-all duration-700 ease-out">
         </div>
       </div>
 
-      <!-- Texte -->
-      <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-16 lg:gap-12 lg:items-center">
-        <div class="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
+      <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-24 lg:gap-12 lg:items-center">
+        <div class="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 text-center lg:text-left">
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Trouvez votre <span class="text-primary">prochain emploi</span> avec
             <span class="underline decoration-primary">PGS Hire</span>
@@ -20,62 +17,43 @@
             Une plateforme moderne et performante qui connecte les talents aux meilleures opportunités
             professionnelles.
           </p>
-          <div class="flex flex-col mt-6">
-            <div class="flex flex-wrap gap-x-6 gap-y-4 items-center">
+          <div class="flex flex-col mt-8 items-center lg:items-start">
+            <div class="flex flex-wrap gap-x-4 gap-y-4 items-center justify-center lg:justify-start">
               <NuxtLink to="/offer"
-                class="btnStyle bg-primary text-white hover:bg-secondary focus-visible:outline-primary">
+                class="btnStyle bg-primary text-white hover:bg-secondary focus-visible:outline-primary transform hover:-translate-y-0.5 transition-all duration-200">
                 Voir les offres
               </NuxtLink>
 
               <NuxtLink to="/dashboard"
-                class="btnStyle bg-secondary text-white hover:bg-primary focus-visible:outline-primary">
+                class="btnStyle bg-secondary text-white hover:bg-primary focus-visible:outline-secondary transform hover:-translate-y-0.5 transition-all duration-200">
                 Mon espace candidat <span aria-hidden="true">→</span>
               </NuxtLink>
 
               <a href="https://web.suitops.com/candidate" target="_blank" rel="noopener noreferrer"
-                class="btnStyle inline-block border border-gray-800 hover:bg-gray-800 hover:text-white transition-colors focus-visible:outline-gray-800">
+                class="btnStyle inline-block border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors focus-visible:outline-gray-800 transform hover:-translate-y-0.5 duration-200">
                 Je suis recruteur
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Image -->
-        <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:basis-2/3 lg:flex-none overflow-hidden">
-          <div class="max-w-full flex-none">
-            <img src="https://pgsdocs.netlify.app/img/docs/postule.png" alt="App screenshot"
-              class="w-full h-auto rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 object-contain">
+        <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:basis-2/3 lg:flex-none overflow-hidden justify-center">
+          <div class="w-full flex-none">
+            <img src="https://pgsdocs.netlify.app/img/docs/postule.png" alt="PGS Hire app screenshot"
+              class="w-full h-auto rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 object-contain max-h-[500px] sm:max-h-full">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Statistics Section -->
-    <section class="bg-white py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-center">
-          <div
-            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl min-h-[200px] min-w-[250px]">
-            <div class="text-5xl lg:text-6xl font-bold text-primary mb-4 counter">500+</div>
-            <p class="text-lg font-medium text-gray-600 text-center">Employeurs de renom</p>
-          </div>
-          <div
-            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl min-h-[200px] min-w-[250px]">
-            <div class="text-5xl lg:text-6xl font-bold text-primary mb-4 counter">2000+</div>
-            <p class="text-lg font-medium text-gray-600 text-center">Opportunités d'emploi</p>
-          </div>
-          <div
-            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl min-h-[200px] min-w-[250px]">
-            <div class="text-5xl lg:text-6xl font-bold text-primary mb-4 counter">15k+</div>
-            <p class="text-lg font-medium text-gray-600 text-center">Carrières lancées</p>
-          </div>
+    <section class="bg-gray-50 py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch"> <div v-for="stat in statistics" :key="stat.label"
+            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white shadow-sm min-h-[200px]"> <div class="text-5xl lg:text-6xl font-extrabold text-primary mb-4 counter">{{ stat.value }}</div> <p class="text-lg font-medium text-gray-700 text-center leading-relaxed">{{ stat.label }}</p> </div>
         </div>
       </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="bg-gray-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <section class="bg-white py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
           <h2 class="text-base font-semibold leading-7 text-primary">
             Recherche d'emploi simplifiée
@@ -87,14 +65,11 @@
             Des outils puissants et intuitifs pour vous accompagner dans votre recherche et décrocher le poste idéal.
           </p>
         </div>
-        <!-- Contenu -->
         <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             <template v-for="feature in features" :key="feature.title">
-              <div class="flex flex-col">
-                <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                  <component :is="feature.icon" class="h-5 w-5 flex-none text-primary" />
-                  {{ feature.title }}
+              <div class="flex flex-col p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"> <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                  <component :is="feature.icon" class="h-6 w-6 flex-none text-primary" /> {{ feature.title }}
                 </dt>
                 <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
                   <p class="flex-auto">{{ feature.description }}</p>
@@ -107,9 +82,7 @@
     </section>
 
 
-    <!-- Benefices Section -->
-    <section class="bg-white py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <section class="bg-gray-50 py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
           <h2 class="text-base font-semibold leading-7 text-primary">Pourquoi nous choisir</h2>
           <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -125,16 +98,11 @@
             <template v-for="benefit in benefits" :key="benefit.title">
               <div class="relative group">
                 <div
-                  class="absolute -inset-1 bg-gradient-to-r from-primary/50 to-secondary/50 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+                  class="absolute -inset-0.5 bg-gradient-to-r from-primary/60 to-secondary/60 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200">
                 </div>
                 <div
-                  class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
-                  <component :is="benefit.icon" class="w-8 h-8 text-primary" />
-                  <div class="space-y-2">
-                    <p class="text-slate-800 font-medium leading-4">{{ benefit.title }}</p>
-                    <p class="text-slate-600 group-hover:text-slate-700 transition duration-200">{{ benefit.description
-                      }}</p>
-                  </div>
+                  class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6 h-full"> <component :is="benefit.icon" class="w-8 h-8 text-primary flex-shrink-0 mt-1" /> <div class="space-y-2">
+                    <p class="text-slate-800 font-medium text-lg leading-snug">{{ benefit.title }}</p> <p class="text-slate-600 group-hover:text-slate-700 transition duration-200 text-base leading-relaxed">{{ benefit.description }}</p> </div>
                 </div>
               </div>
             </template>
@@ -148,52 +116,67 @@
 <script setup>
 import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
 
+// Data for sections
 const features = [
   {
     icon: IconSearch,
-    title: "Recherche d'offres",
-    description: "Parcourez et postulez à des offres d'emploi attractives en quelques clics, adaptées à vos compétences et aspirations.",
+    title: "Recherche d'offres intuitive",
+    description: "Parcourez et postulez à des milliers d'offres d'emploi attractives en quelques clics, parfaitement adaptées à vos compétences et aspirations professionnelles.",
   },
   {
     icon: IconEyeStar,
-    title: "Suivi de vos candidatures",
-    description: "Suivez l'évolution de vos candidatures, organisez vos entretiens et recevez des retours pour progresser dans votre parcours professionnel.",
+    title: "Suivi détaillé des candidatures",
+    description: "Suivez en temps réel l'évolution de vos candidatures, organisez vos entretiens et recevez des retours constructifs pour progresser sereinement dans votre parcours professionnel.",
   },
   {
     icon: IconBellStar,
-    title: "Alertes personnalisées",
-    description: "Activez des alertes personnalisées pour ne manquer aucune opportunité et concentrez-vous sur l'essentiel : décrocher le poste de vos rêves.",
+    title: "Alertes d'emploi personnalisées",
+    description: "Activez des alertes personnalisées basées sur vos critères pour ne manquer aucune nouvelle opportunité et concentrez-vous sur l'essentiel : décrocher le poste de vos rêves.",
   },
 ]
 
 const benefits = [
   {
     icon: IconCircleCheck,
-    title: "Simplicité d'utilisation",
-    description: "Interface intuitive et processus optimisés pour une expérience utilisateur fluide."
+    title: "Simplicité et Ergonomie",
+    description: "Profitez d'une interface intuitive et de processus optimisés, conçus pour une expérience utilisateur fluide et agréable à chaque étape.",
   },
   {
     icon: IconBolt,
-    title: "Performance",
-    description: "Des outils performants pour accélérer votre processus de recrutement."
+    title: "Performance et Rapidité",
+    description: "Bénéficiez d'outils performants et réactifs qui accélèrent votre processus de recherche ou de recrutement, vous faisant gagner un temps précieux.",
   },
   {
     icon: IconLock,
-    title: "Sécurité",
-    description: "Protection des données et confidentialité garanties pour tous les utilisateurs."
-  }
+    title: "Sécurité et Confidentialité",
+    description: "Vos données sont notre priorité. Nous garantissons une protection des informations et une confidentialité absolue pour tous nos utilisateurs.",
+  },
 ]
 
-// SEO
-useHead({
-  title: 'Acceuil',
-  meta: [{ name: 'description', content: 'Plateforme moderne de recrutement intégrée à PGS' }]
+// Added a new data structure for statistics for better maintainability
+const statistics = [
+  { value: "500+", label: "Employeurs de renom" },
+  { value: "2000+", label: "Opportunités d'emploi" },
+  { value: "15k+", label: "Carrières lancées" },
+];
+
+
+// SEO (Nuxt 3 uses `useSeoMeta` for more detailed control)
+useSeoMeta({
+  title: 'PGS Hire - Trouvez votre prochain emploi au Bénin et au-delà',
+  ogTitle: 'PGS Hire - Votre Partenaire Carrière',
+  description: 'PGS Hire : La plateforme moderne et performante qui connecte les talents aux meilleures opportunités professionnelles au Bénin. Trouvez, postulez, et propulsez votre carrière.',
+  ogDescription: 'PGS Hire : La plateforme moderne et performante qui connecte les talents aux meilleures opportunités professionnelles au Bénin. Trouvez, postulez, et propulsez votre carrière.',
+  ogImage: 'https://pgsdocs.netlify.app/img/docs/postule.png', // Replace with an actual hero image URL for better SEO
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'PGS Hire - Trouvez l\'emploi de vos rêves',
+  twitterDescription: 'Découvrez des milliers d\'offres d\'emploi et accélérez votre carrière avec PGS Hire.',
 })
 </script>
 
 <style scoped>
 .btnStyle {
-  @apply font-semibold rounded-md text-sm px-3.5 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 shadow-sm
+  @apply font-semibold rounded-md text-sm px-3.5 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 shadow-sm;
 }
 
 .counter {
@@ -207,5 +190,21 @@ useHead({
 
 .counter:hover::after {
   @apply w-16;
+}
+
+/* Custom animations for better visual feedback */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInSlideUp {
+  animation: fadeInSlideUp 0.5s ease-out forwards;
 }
 </style>
