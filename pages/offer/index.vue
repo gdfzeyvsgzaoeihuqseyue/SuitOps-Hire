@@ -241,16 +241,7 @@ import { useJobsStore } from '~/stores/jobs';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { storeToRefs } from 'pinia';
-import {
-  IconRefresh,
-  IconSearch,
-  IconInfoCircle,
-  IconLocation,
-  IconUsers,
-  IconCalendarX,
-  IconX,
-  IconArrowRight // Added for "Voir l'offre →"
-} from '@tabler/icons-vue';
+import { IconRefresh, IconSearch, IconInfoCircle, IconLocation, IconUsers, IconCalendarX, IconX, IconArrowRight } from '@tabler/icons-vue';
 
 // --- Store et Données de base ---
 const jobsStore = useJobsStore();
@@ -390,19 +381,13 @@ watch(route, () => {
 
 // --- SEO ---
 useHead({
-  title: "Offres d'emploi - PGS Hire",
+  title: "Offres d'emploi",
   meta: [
     {
       name: 'description',
-      content: "Découvrez et postulez à des milliers d'offres d'emploi et de stage au Bénin et dans la sous-région. Trouvez votre prochain défi professionnel avec PGS Hire."
+      content: "Découvrez et postulez à des milliers d'offres d'emploi et de stage au Bénin et dans la sous-région. Trouvez votre prochain défi professionnel avec SuitOps Hire."
     },
-    { property: 'og:title', content: "Offres d'emploi - PGS Hire" },
-    { property: 'og:description', content: "Découvrez et postulez à des milliers d'offres d'emploi et de stage au Bénin et dans la sous-région. Trouvez votre prochain défi professionnel avec PGS Hire." },
-    { property: 'og:image', content: '/img/social-share-offers.png' }, // Replace with an actual relevant image URL
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: "Offres d'emploi - PGS Hire" },
-    { name: 'twitter:description', content: "Découvrez et postulez à des milliers d'offres d'emploi et de stage au Bénin et dans la sous-région. Trouvez votre prochain défi professionnel avec PGS Hire." },
-    { name: 'twitter:image', content: '/img/social-share-offers.png' },
+    { property: 'og:title', content: "Offres d'emploi - SuitOps Hire" },
   ]
 });
 
@@ -412,8 +397,8 @@ const getContractClass = (contract: string) => {
     case 'cdi': return 'bg-green-100 text-green-800';
     case 'cdd': return 'bg-purple-100 text-purple-800';
     case 'stage': return 'bg-orange-100 text-orange-800';
-    case 'alternance': return 'bg-blue-100 text-blue-800'; // Added for completeness
-    case 'freelance': return 'bg-red-100 text-red-800'; // Added for completeness
+    case 'alternance': return 'bg-blue-100 text-blue-800'; 
+    case 'freelance': return 'bg-red-100 text-red-800'; 
     default: return 'bg-gray-100 text-gray-800';
   }
 };

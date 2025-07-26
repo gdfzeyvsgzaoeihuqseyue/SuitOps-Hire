@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <NuxtLink to="/" class="flex justify-center">
-        <img src="/img/logoDeskCol.png" alt="PGS Hire" class="h-12 w-auto" />
+        <img src="/img/logoDeskCol.png" alt="SuitOps Hire" class="h-12 w-auto" />
       </NuxtLink>
       <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
         Réinitialiser votre mot de passe
@@ -71,6 +71,6 @@ const handleForgotPassword = () => {
 // SEO
 useHead({
   title: 'Mot de passe oublié',
-  meta: [{ name: 'description', content: 'Réinitialisez votre mot de passe PGS Hire' }]
+  meta: [{ name: 'description', content: 'Réinitialisez votre mot de passe SuitOps Hire' }]
 })
 </script>

@@ -178,16 +178,7 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import {
-  IconArrowLeft,
-  IconLocation,
-  IconCalendar,
-  IconUsers,
-  IconMail,
-  IconArrowRight, // Added for "Voir le profil complet"
-  IconCircleCheck, // Added for quiz status
-  IconInfoCircle // Added for quiz status
-} from '@tabler/icons-vue';
+import { IconArrowLeft, IconLocation, IconCalendar, IconUsers, IconMail, IconArrowRight, IconCircleCheck, IconInfoCircle } from '@tabler/icons-vue';
 import { useJobsStore } from '~/stores/jobs';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
@@ -235,15 +226,9 @@ const getContractClass = (contract: string) => {
 
 // --- SEO Configuration ---
 useSeoMeta({
-  title: currentJob.value ? `${currentJob.value.post} - ${currentJob.value.company.name} | PGS Hire Bénin` : 'Offre d\'emploi introuvable | PGS Hire Bénin',
-  ogTitle: currentJob.value ? `${currentJob.value.post} chez ${currentJob.value.company.name} | PGS Hire` : 'Offre d\'emploi | PGS Hire',
-  description: currentJob.value ? `Détails de l'offre d'emploi pour ${currentJob.value.post} chez ${currentJob.value.company.name}. Postulez dès maintenant sur PGS Hire.` : 'Consultez les détails des offres d\'emploi sur PGS Hire.',
-  ogDescription: currentJob.value ? `Découvrez le profil recherché, les tâches, les compétences et les documents requis pour le poste de ${currentJob.value.post} chez ${currentJob.value.company.name}.` : 'Recherchez des offres d\'emploi et de stage au Bénin.',
-  ogImage: currentJob.value?.company?.logo?.url || '/img/social-share-job-default.png', // Fallback image
-  twitterCard: 'summary_large_image',
-  twitterTitle: currentJob.value ? `${currentJob.value.post} - ${currentJob.value.company.name} | PGS Hire` : 'Offre d\'emploi | PGS Hire',
-  twitterDescription: currentJob.value ? `Postulez au poste de ${currentJob.value.post} chez ${currentJob.value.company.name}.` : 'Votre prochaine carrière commence ici.',
-  twitterImage: currentJob.value?.company?.logo?.url || '/img/social-share-job-default.png',
+  title: currentJob.value ? `${currentJob.value.post} - ${currentJob.value.company.name}` : 'Offre d\'emploi introuvable',
+  ogTitle: currentJob.value ? `${currentJob.value.post} chez ${currentJob.value.company.name}` : 'Offre d\'emploi',
+  description: currentJob.value ? `Détails de l'offre d'emploi pour ${currentJob.value.post} chez ${currentJob.value.company.name}. Postulez dès maintenant sur SuitOps Hire.` : 'Consultez les détails des offres d\'emploi sur SuitOps Hire.',
 });
 </script>
 

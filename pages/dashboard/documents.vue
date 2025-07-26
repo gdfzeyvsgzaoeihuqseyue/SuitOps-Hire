@@ -305,6 +305,6 @@ const FileTypeIcon = {
 // SEO
 useHead({
   title: 'Documents',
-  meta: [{ name: 'description', content: 'Gerer vos documents professionnels sur PGS Hire' }]
+  meta: [{ name: 'description', content: 'Gerer vos documents professionnels sur SuitOps Hire' }]
 })
 </script>

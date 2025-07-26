@@ -2,7 +2,7 @@
   <div class="bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <div class="flex justify-center">
-        <img src="/img/logoDeskCol.png" alt="PGS Hire" class="h-36 w-auto" />
+        <img src="/img/logoDeskCol.png" alt="SuitOps Hire" class="h-36 w-auto" />
       </div>
       <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">
         Connectez-vous à votre compte
@@ -133,6 +133,6 @@ const handleLogin = async () => {
 // SEO
 useHead({
   title: 'Connexion',
-  meta: [{ name: 'description', content: 'Connectez-vous à votre compte PGS Hire' }]
+  meta: [{ name: 'description', content: 'Connectez-vous à votre compte SuitOps Hire' }]
 })
 </script>

@@ -164,14 +164,7 @@ import { storeToRefs } from 'pinia';
 import { useJobsStore } from '~/stores/jobs';
 import { format, differenceInDays } from 'date-fns'; // Added differenceInDays
 import { fr } from 'date-fns/locale';
-import {
-  IconRefresh,
-  IconSearch,
-  IconLocation,
-  IconUsers,
-  IconCalendar,
-  IconArrowRight,
-} from '@tabler/icons-vue';
+import { IconRefresh, IconSearch, IconLocation, IconUsers, IconCalendar, IconArrowRight } from '@tabler/icons-vue';
 
 // --- Store et Données de base ---
 const jobsStore = useJobsStore();
@@ -186,19 +179,19 @@ const selectedBadge = ref('');
 // Mapping des badges avec des emojis pour une meilleure visibilité
 const badgeEmojis: { [key: string]: string } = {
   'Clôture proche': '⏳',
-  'Plusieurs postes': '🚀', // Changed from 'Multiple postes' for consistency
-  'Grande entreprise': '🏢', // Changed from '🌍' for consistency
-  'Emploi stable': '✅', // Changed from '📃' for consistency
-  'Quiz disponible': '📝', // Changed from 'Quiz' for clarity
+  'Plusieurs postes': '🔢', 
+  'Grande entreprise': '🏢', 
+  'Emploi stable': '✅', 
+  'Quiz disponible': '📝', 
   'Urgent': '⚡',
-  'Nouveau': '✨', // Added new badge for recently posted jobs
+  'Nouveau': '✨', 
 };
 
 // Fonctions pour déterminer les badges
 const isClosingSoon = (job: any) => differenceInDays(new Date(job.closingDate), new Date()) <= 7 && differenceInDays(new Date(job.closingDate), new Date()) > 0;
 const isUrgent = (job: any) => differenceInDays(new Date(job.closingDate), new Date()) <= 3 && differenceInDays(new Date(job.closingDate), new Date()) > 0;
 const hasMultiplePositions = (job: any) => job.placeNumber > 1;
-const isNewJob = (job: any) => differenceInDays(new Date(), new Date(job.createdAt)) <= 7; // Job posted within the last 7 days
+const isNewJob = (job: any) => differenceInDays(new Date(), new Date(job.createdAt)) <= 7; 
 
 // Récupère tous les badges applicables à une offre donnée
 const getJobBadges = (job: any) => {
@@ -325,15 +318,9 @@ watch(searchQuery, () => {
 
 // --- SEO (Search Engine Optimization) ---
 useSeoMeta({
-  title: "Suggestions d'offres d'emploi personnalisées - PGS Hire Bénin",
-  ogTitle: "Découvrez les offres d'emploi recommandées pour vous | PGS Hire",
-  description: "Recevez des suggestions d'offres d'emploi personnalisées et pertinentes adaptées à votre profil et vos préférences. Trouvez votre prochain défi professionnel avec PGS Hire au Bénin.",
-  ogDescription: "Obtenez des recommandations d'emploi sur mesure avec PGS Hire. Explorez les meilleures opportunités qui correspondent à vos compétences et aspirations.",
-  ogImage: '/img/social-share-suggestions.png', // Chemin vers une image pertinente pour le partage social
-  twitterCard: 'summary_large_image',
-  twitterTitle: "Suggestions d'emploi personnalisées - PGS Hire",
-  twitterDescription: "Découvrez les offres d'emploi les plus pertinentes et recommandées pour vous sur PGS Hire.",
-  twitterImage: '/img/social-share-suggestions.png',
+  title: "Suggestions d'offres d'emploi personnalisées",
+  ogTitle: "Découvrez les offres d'emploi recommandées pour vous",
+  description: "Recevez des suggestions d'offres d'emploi personnalisées et pertinentes adaptées à votre profil et vos préférences. Trouvez votre prochain défi professionnel avec SuitOps Hire au Bénin.",
 });
 </script>
 

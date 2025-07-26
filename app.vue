@@ -8,6 +8,6 @@
 
 <script setup lang="ts">
 useHead({
-  titleTemplate: '%s | SUITOPS Hire',
+  titleTemplate: '%s | SUITOPS HIRE',
 })
 </script>

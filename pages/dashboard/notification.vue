@@ -215,6 +215,6 @@ const NotificationIcon = {
 // SEO
 useHead({
   title: 'Notifications',
-  meta: [{ name: 'description', content: 'Historique de toutes vos alertes sur PGS Hire' }]
+  meta: [{ name: 'description', content: 'Historique de toutes vos alertes sur SuitOps Hire' }]
 })
 </script>

@@ -286,6 +286,6 @@ const { sections, openModal, userData, getIcon } = useProfileContent()
 
 useHead({
   title: 'Profil',
-  meta: [{ name: 'description', content: 'Vos infos personnel et de candidature sur PGS Hire' }]
+  meta: [{ name: 'description', content: 'Vos infos personnel et de candidature sur SuitOps Hire' }]
 })
 </script>

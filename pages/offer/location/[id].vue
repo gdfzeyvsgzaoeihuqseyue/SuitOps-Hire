@@ -198,17 +198,7 @@ import { storeToRefs } from 'pinia';
 import { useJobsStore } from '~/stores/jobs';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import {
-  IconArrowLeft,
-  IconRefresh,
-  IconSearch,
-  IconCalendar,
-  IconUsers,
-  IconBuilding,
-  IconStar,
-  IconSun, // Used for location icon
-  IconArrowRight // Added for "Voir l'offre →"
-} from '@tabler/icons-vue';
+import { IconArrowLeft, IconRefresh, IconSearch, IconCalendar, IconUsers, IconBuilding, IconStar, IconArrowRight } from '@tabler/icons-vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -390,9 +380,9 @@ const clearFilters = () => {
 
 // --- SEO Configuration ---
 useSeoMeta({
-  title: `Offres d'emploi à ${locationData.value.name} | PGS Hire Bénin`,
-  ogTitle: `Découvrez les offres d'emploi à ${locationData.value.name} | PGS Hire`,
-  description: `Explorez toutes les opportunités de carrière et les offres d'emploi actives à ${locationData.value.name} au Bénin. Trouvez votre prochain poste idéal avec PGS Hire.`,
+  title: `Offres d'emploi à ${locationData.value.name}`,
+  ogTitle: `Découvrez les offres d'emploi à ${locationData.value.name}`,
+  description: `Explorez toutes les opportunités de carrière et les offres d'emploi actives à ${locationData.value.name} au Bénin. Trouvez votre prochain poste idéal avec SuitOps Hire.`,
 });
 </script>
 

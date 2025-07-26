@@ -223,15 +223,9 @@ onMounted(refreshLocation);
 
 // --- SEO (Search Engine Optimization) ---
 useSeoMeta({
-  title: "Offres d'emploi par ville et région - PGS Hire Bénin",
-  ogTitle: "Trouvez des emplois par localisation avec PGS Hire",
-  description: "Découvrez toutes les offres d'emploi disponibles par ville et région au Bénin. Simplifiez votre recherche d'emploi et trouvez des opportunités près de chez vous avec PGS Hire.",
-  ogDescription: "Explorez les opportunités de carrière par localisation au Bénin. Trouvez des emplois dans votre ville ou région préférée avec PGS Hire.",
-  ogImage: '/img/social-share-locations.png', // Chemin vers une image pertinente pour le partage social
-  twitterCard: 'summary_large_image',
-  twitterTitle: "Emplois par Localisation - PGS Hire",
-  twitterDescription: "Découvrez toutes les offres d'emploi disponibles par ville et région au Bénin avec PGS Hire.",
-  twitterImage: '/img/social-share-locations.png',
+  title: "Offres d'emploi par ville et région",
+  ogTitle: "Trouvez des emplois par localisation avec SuitOps Hire",
+  description: "Découvrez toutes les offres d'emploi disponibles par ville et région au Bénin. Simplifiez votre recherche d'emploi et trouvez des opportunités près de chez vous avec SuitOps Hire.",
 });
 </script>
 

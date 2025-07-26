@@ -7,11 +7,13 @@
         </div>
       </div>
 
-      <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 flex flex-col lg:flex-row lg:px-8 lg:py-24 lg:gap-12 lg:items-center">
-        <div class="order-2 lg:order-1 mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 text-center lg:text-left">
+      <div
+        class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 flex flex-col lg:flex-row lg:px-8 lg:py-24 lg:gap-12 lg:items-center">
+        <div
+          class="order-2 lg:order-1 mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 text-center lg:text-left">
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Trouvez votre <span class="text-primary">prochain emploi</span> avec
-            <span class="underline decoration-primary">PGS Hire</span>
+            <span class="underline decoration-primary">SuitOps Hire</span>
           </h1>
           <p class="mt-6 text-lg leading-8 text-gray-600">
             Une plateforme moderne et performante qui connecte les talents aux meilleures opportunités
@@ -37,23 +39,30 @@
           </div>
         </div>
 
-        <div class="order-1 lg:order-2 mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:basis-2/3 lg:flex-none overflow-hidden justify-center">
+        <div
+          class="order-1 lg:order-2 mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:basis-2/3 lg:flex-none overflow-hidden justify-center">
           <div class="w-full flex-none">
-            <img src="https://pgsdocs.netlify.app/img/docs/postule.png" alt="PGS Hire app screenshot"
+            <img src="https://pgsdocs.netlify.app/img/docs/postule.png" alt="SuitOps Hire"
               class="w-full h-auto rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 object-contain max-h-[500px] sm:max-h-full">
           </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-gray-50 py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch"> <div v-for="stat in statistics" :key="stat.label"
-            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white shadow-sm min-h-[200px]"> <div class="text-5xl lg:text-6xl font-extrabold text-primary mb-4 counter">{{ stat.value }}</div> <p class="text-lg font-medium text-gray-700 text-center leading-relaxed">{{ stat.label }}</p> </div>
+    <section class="bg-gray-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch">
+          <div v-for="stat in statistics" :key="stat.label"
+            class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white shadow-sm min-h-[200px]">
+            <div class="text-5xl lg:text-6xl font-bold text-primary mb-4 counter">{{ stat.value }}</div>
+            <p class="text-lg font-medium text-gray-700 text-center leading-relaxed">{{ stat.label }}</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-white py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <section class="bg-white py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
           <h2 class="text-base font-semibold leading-7 text-primary">
             Recherche d'emploi simplifiée
@@ -68,7 +77,9 @@
         <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             <template v-for="feature in features" :key="feature.title">
-              <div class="flex flex-col p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"> <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+              <div
+                class="flex flex-col p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                   <component :is="feature.icon" class="h-6 w-6 flex-none text-primary" /> {{ feature.title }}
                 </dt>
                 <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
@@ -82,11 +93,12 @@
     </section>
 
 
-    <section class="bg-gray-50 py-24 sm:py-32"> <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <section class="bg-gray-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
           <h2 class="text-base font-semibold leading-7 text-primary">Pourquoi nous choisir</h2>
           <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Les avantages de PGS Hire
+            Les avantages de SuitOps Hire
           </p>
           <p class="mt-6 text-lg leading-8 text-gray-600">
             Découvrez pourquoi les entreprises et les candidats nous font confiance pour leurs besoins en recrutement.
@@ -101,8 +113,14 @@
                   class="absolute -inset-0.5 bg-gradient-to-r from-primary/60 to-secondary/60 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200">
                 </div>
                 <div
-                  class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6 h-full"> <component :is="benefit.icon" class="w-8 h-8 text-primary flex-shrink-0 mt-1" /> <div class="space-y-2">
-                    <p class="text-slate-800 font-medium text-lg leading-snug">{{ benefit.title }}</p> <p class="text-slate-600 group-hover:text-slate-700 transition duration-200 text-base leading-relaxed">{{ benefit.description }}</p> </div>
+                  class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6 h-full">
+                  <component :is="benefit.icon" class="w-8 h-8 text-primary flex-shrink-0 mt-1" />
+                  <div class="space-y-2">
+                    <p class="text-slate-800 font-medium text-lg leading-snug">{{ benefit.title }}</p>
+                    <p
+                      class="text-slate-600 group-hover:text-slate-700 transition duration-200 text-base leading-relaxed">
+                      {{ benefit.description }}</p>
+                  </div>
                 </div>
               </div>
             </template>
@@ -155,22 +173,17 @@ const benefits = [
 
 // Added a new data structure for statistics for better maintainability
 const statistics = [
-  { value: "500+", label: "Employeurs de renom" },
-  { value: "2000+", label: "Opportunités d'emploi" },
-  { value: "15k+", label: "Carrières lancées" },
+  { value: "0+", label: "Employeurs de renom" },
+  { value: "0+", label: "Opportunités d'emploi" },
+  { value: "0k+", label: "Carrières lancées" },
 ];
 
 
 // SEO (Nuxt 3 uses `useSeoMeta` for more detailed control)
 useSeoMeta({
-  title: 'PGS Hire - Trouvez votre prochain emploi au Bénin et au-delà',
-  ogTitle: 'PGS Hire - Votre Partenaire Carrière',
-  description: 'PGS Hire : La plateforme moderne et performante qui connecte les talents aux meilleures opportunités professionnelles au Bénin. Trouvez, postulez, et propulsez votre carrière.',
-  ogDescription: 'PGS Hire : La plateforme moderne et performante qui connecte les talents aux meilleures opportunités professionnelles au Bénin. Trouvez, postulez, et propulsez votre carrière.',
-  ogImage: 'https://pgsdocs.netlify.app/img/docs/postule.png', // Replace with an actual hero image URL for better SEO
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'PGS Hire - Trouvez l\'emploi de vos rêves',
-  twitterDescription: 'Découvrez des milliers d\'offres d\'emploi et accélérez votre carrière avec PGS Hire.',
+  title: 'SuitOps Hire - Trouvez votre prochain emploi au Bénin et au-delà',
+  ogTitle: 'SuitOps Hire - Votre Partenaire Carrière',
+  description: 'SuitOps Hire : La plateforme moderne et performante qui connecte les talents aux meilleures opportunités professionnelles au Bénin. Trouvez, postulez, et propulsez votre carrière.',
 })
 </script>
 
@@ -198,6 +211,7 @@ useSeoMeta({
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

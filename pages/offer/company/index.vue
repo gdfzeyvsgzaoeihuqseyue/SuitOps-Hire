@@ -220,15 +220,9 @@ onMounted(() => {
 
 // --- SEO (Search Engine Optimization) ---
 useSeoMeta({
-  title: "Entreprises qui recrutent - Trouvez votre emploi | PGS Hire Bénin",
-  ogTitle: "Découvrez les entreprises qui recrutent avec PGS Hire",
-  description: "Explorez la liste des entreprises partenaires de PGS Hire au Bénin et découvrez leurs offres d'emploi actives. Trouvez l'employeur idéal pour votre carrière.",
-  ogDescription: "Découvrez les entreprises qui recrutent actuellement au Bénin via PGS Hire et trouvez des opportunités de carrière uniques.",
-  ogImage: '/img/social-share-companies.png', // Chemin vers une image pertinente pour le partage social
-  twitterCard: 'summary_large_image',
-  twitterTitle: "Entreprises qui recrutent - PGS Hire",
-  twitterDescription: "Explorez la liste des entreprises partenaires de PGS Hire au Bénin et découvrez leurs offres d'emploi actives.",
-  twitterImage: '/img/social-share-companies.png',
+  title: "Entreprises qui recrutent - Trouvez votre emploi",
+  ogTitle: "Découvrez les entreprises qui recrutent avec SuitOps Hire",
+  description: "Explorez la liste des entreprises partenaires de SuitOps Hire au Bénin et découvrez leurs offres d'emploi actives. Trouvez l'employeur idéal pour votre carrière.",
 });
 </script>
 

@@ -209,18 +209,7 @@ import { storeToRefs } from 'pinia';
 import { useJobsStore } from '~/stores/jobs';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import {
-  IconArrowLeft,
-  IconRefresh,
-  IconMapPin,
-  IconSearch,
-  IconLocation,
-  IconBriefcase,
-  IconMail,
-  IconCalendar,
-  IconUsers,
-  IconArrowRight // Added for "Voir l'offre →"
-} from '@tabler/icons-vue';
+import { IconArrowLeft, IconRefresh, IconMapPin, IconSearch, IconLocation, IconBriefcase, IconMail, IconCalendar, IconUsers, IconArrowRight } from '@tabler/icons-vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -376,9 +365,9 @@ const clearFilters = () => {
 
 // --- SEO (Search Engine Optimization) ---
 useSeoMeta({
-  title: `Offres d'emploi chez ${company.value?.name || 'cette entreprise'} | PGS Hire Bénin`,
-  ogTitle: `Découvrez les offres d'emploi chez ${company.value?.name || 'cette entreprise'} | PGS Hire`,
-  description: `Consultez toutes les offres d'emploi actives et les opportunités de carrière chez ${company.value?.name || 'cette entreprise'} sur PGS Hire au Bénin.`,
+  title: `Offres d'emploi chez ${company.value?.name || 'cette entreprise'}`,
+  ogTitle: `Découvrez les offres d'emploi chez ${company.value?.name || 'cette entreprise'}`,
+  description: `Consultez toutes les offres d'emploi actives et les opportunités de carrière chez ${company.value?.name || 'cette entreprise'} sur SuitOps Hire au Bénin.`,
 });
 </script>
 

@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'PGS Hire - Plateforme de Recrutement',
+      title: 'SuitOps Hire - Plateforme de Recrutement',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
