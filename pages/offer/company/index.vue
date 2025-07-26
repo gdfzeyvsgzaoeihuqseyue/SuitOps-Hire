@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 sm:p-6 mt-6 min-h-screen bg-gray-50">
+  <div class="p-4 sm:p-6 mt-6 min-h-screen">
     <header class="mb-8 flex flex-col gap-4">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between">
         <div>
@@ -85,7 +85,7 @@
         <NuxtLink v-for="company in paginatedCompanies" :key="company.id"
           :to="`/offer/company/${company.id}/${company.slug}`"
           class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col items-center text-center">
-          <img :src="company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${company.name}&backgroundColor=e0f2fe,c0e3fd&fontColor=0369a1`"
+          <img :src="company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${company.name}`"
             :alt="`Logo de ${company.name}`" class="w-20 h-20 rounded-full border-2 border-gray-100 object-cover mb-4 flex-shrink-0"
             @error="handleImageError" />
           <div class="flex-1 min-w-0">

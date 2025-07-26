@@ -126,13 +126,13 @@
           <p class="font-mono text-xs text-center">
             par <span
               class="mx-1 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-gray-50/30 hover:bg-blue-100 hover:text-blue-600 transition-all">
-              <NuxtLink to="https://progestionsoft.org" target="_blank">PGS</NuxtLink>
+              <NuxtLink to="https://progestionsoft.org" target="_blank">SuitOps</NuxtLink>
             </span>
           </p>
         </div>
 
         <div class="text-center">
-          <p class="text-xs">&copy; {{ new Date().getFullYear() }} PGS Hire. Tous droits réservés.</p>
+          <p class="text-xs">&copy; {{ new Date().getFullYear() }} SuitOps Hire. Tous droits réservés.</p>
         </div>
       </div>
     </aside>

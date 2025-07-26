@@ -47,7 +47,7 @@
         </div>
 
         <div>
-          <p>&copy; {{ new Date().getFullYear() }} PGS Hire. Tous droits réservés.</p>
+          <p>&copy; {{ new Date().getFullYear() }} SUITOPS Hire. Tous droits réservés.</p>
         </div>
 
         <div class="flex space-x-6">

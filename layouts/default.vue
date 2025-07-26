@@ -101,66 +101,7 @@
       </div>
     </main>
 
-    <footer class="bg-white border-t border-neutral-200">
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div class="lg:col-span-2">
-            <h3 class="footerTitle">PGS Hire</h3>
-            <p class="mt-4 text-gray-600">La simplicité au service de votre carrière.</p>
-
-            <div class="mt-4 space-x-4 flex">
-              <span v-if="socialLoading" class="text-sm text-gray-500">Chargement des liens sociaux...</span>
-              <span v-else-if="socialError" class="text-critique text-sm">Erreur lors du chargement.</span>
-              <div v-else class="flex items-center gap-4">
-                <a v-for="item in socialLinks" :key="item.name" :href="item.href"
-                  class="text-gray-500 hover:text-gray-900 transition-colors duration-200" target="_blank" rel="noopener">
-                  <span class="sr-only">{{ item.name }}</span>
-                  <component :is="item.icon" class="h-6 w-6" aria-hidden="true" v-if="item.icon" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 class="footerTitle">Navigation</h3>
-            <ul role="list" class="mt-6 space-y-4">
-              <li>
-                <NuxtLink to="/blog" class="footerLink">Blog</NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/#" class="footerLink">Réccruter</NuxtLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="footerTitle">Documentations</h3>
-            <ul role="list" class="mt-6 space-y-4">
-              <li>
-                <NuxtLink to="/#" class="footerLink">Candidats</NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/#" class="footerLink">Récruteur</NuxtLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center border-t border-gray-200 mt-8 pt-8 justify-around text-center text-gray-500 text-sm">
-          <div>
-            <p>&copy; {{ new Date().getFullYear() }} PGS Hire. Tous droits réservés.</p>
-          </div>
-
-          <div class="mt-4 sm:mt-0"> <p class="font-mono">
-              par <span
-                class="mx-2 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-gray-300 hover:bg-blue-50 hover:text-blue-600 transition-all">
-                <NuxtLink to="https://progestionsoft.org" target="_blank">PRO GESTION SOFT SARL</NuxtLink>
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <AppFooter />
   </div>
 </template>
 
@@ -168,15 +109,11 @@
 import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
 
-// Assume useSocialLinks is a composable that fetches social links
-const { filteredLinks: socialLinks, error: socialError, isLoading: socialLoading } =
-  await useSocialLinks(['Facebook', 'LinkedIn', 'Youtube'])
-
 const authStore = useAuthStore()
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const user = computed(() => authStore.user)
 const showProfileMenu = ref(false)
-const showMobileMenu = ref(false) // Nouvelle variable d'état pour le menu mobile
+const showMobileMenu = ref(false) 
 
 const userInitials = computed(() => {
   if (!user.value) return ''
