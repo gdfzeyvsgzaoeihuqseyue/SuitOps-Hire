@@ -51,14 +51,22 @@
 
     <section class="bg-gray-50 py-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch">
-          <div v-for="stat in statistics" :key="stat.label"
+        <div v-if="jobsStore.isLoading" class="text-center py-8">
+          <p class="text-gray-600">Chargement des statistiques...</p>
+        </div>
+        <div v-else-if="jobsStore.error" class="text-center py-8 text-critique">
+          <p>Erreur de chargement des statistiques. Veuillez réessayer plus tard.</p>
+        </div>
+        
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch">
+          <div v-for="stat in dynamicStatistics" :key="stat.label"
             class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white shadow-sm min-h-[200px]">
             <div class="text-5xl lg:text-6xl font-bold text-primary mb-4 counter">{{ stat.value }}</div>
             <p class="text-lg font-medium text-gray-700 text-center leading-relaxed">{{ stat.label }}</p>
+            <p v-if="stat.note" class="mt-2 text-center text-sm text-gray-500 italic">{{ stat.note }}</p>
           </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <section class="bg-white py-24 sm:py-32">
@@ -132,9 +140,73 @@
 </template>
 
 <script setup>
+import { computed, onMounted } from 'vue';
+import { useJobsStore } from '~/stores/jobs';
+import { storeToRefs } from 'pinia';
+
 import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
 
-// Data for sections
+// --- Store et Données réelles ---
+const jobsStore = useJobsStore();
+const { jobs, isLoading, error } = storeToRefs(jobsStore);
+
+// Fonction pour formater les grands nombres (k, M) selon les règles spécifiées
+const formatNumber = (num) => {
+  if (num < 10) {
+    return num.toString();
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+';
+  }
+  if (num >= 10) {
+    if (num < 100) {
+      return num.toString() + '+';
+    }
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k+';
+  }
+  return num.toString();
+};
+
+// Calcul des statistiques réelles
+const totalJobs = computed(() => jobs.value.length);
+
+const uniqueCompanies = computed(() => {
+  const companyIds = new Set();
+  jobs.value.forEach(job => {
+    if (job.company && job.company.id) {
+      companyIds.add(job.company.id);
+    }
+  });
+  return companyIds.size;
+});
+
+// Estimation des carrières lancées
+const estimatedCareersLaunched = computed(() => {
+  const baseValue = jobs.value.length;
+  const multiplier = 5;
+  return Math.floor(baseValue * multiplier);
+});
+
+// Définir les statistiques dynamiques
+const dynamicStatistics = computed(() => [
+  { value: formatNumber(totalJobs.value), label: "Opportunités d'emploi" },
+  { value: formatNumber(uniqueCompanies.value), label: "Employeurs de renom" },
+  {
+    value: formatNumber(estimatedCareersLaunched.value),
+    label: "Carrières lancées",
+    note: "Estimation basée sur l'activité de la plateforme." 
+  },
+]);
+
+// Au montage du composant, déclenchez la récupération des jobs si ce n'est pas déjà fait
+onMounted(() => {
+  if (jobs.value.length === 0 && !isLoading.value && !error.value) {
+    jobsStore.fetchJobs();
+  }
+});
+
+
+// Data for sections (features and benefits remain as is)
 const features = [
   {
     icon: IconSearch,
@@ -170,14 +242,6 @@ const benefits = [
     description: "Vos données sont notre priorité. Nous garantissons une protection des informations et une confidentialité absolue pour tous nos utilisateurs.",
   },
 ]
-
-// Added a new data structure for statistics for better maintainability
-const statistics = [
-  { value: "0+", label: "Employeurs de renom" },
-  { value: "0+", label: "Opportunités d'emploi" },
-  { value: "0k+", label: "Carrières lancées" },
-];
-
 
 // SEO (Nuxt 3 uses `useSeoMeta` for more detailed control)
 useSeoMeta({
