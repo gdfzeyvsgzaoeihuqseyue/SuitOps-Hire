@@ -10,7 +10,7 @@
           <p class="mt-2 text-sm sm:text-base">La simplicité au service de votre carrière.</p>
 
           <!-- Liens sociaux -->
-          <div class="mt-4 space-x-4 flex">
+          <div class="mt-4 space-x-4 flex justify-center sm:justify-start">
             <span v-if="socialLoading" class="text-sm">Chargement des liens sociaux...</span>
             <span v-else-if="socialError" class="text-critique text-sm">Erreur lors du chargement.</span>
             <div v-else class="flex items-center gap-4">
