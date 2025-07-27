@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 sm:p-6 mt-6 min-h-screen bg-gray-50">
+  <div class="p-4 sm:p-6 mt-6 min-h-screen">
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
       <button @click="router.go(-1)" class="text-primary hover:text-secondary flex items-center gap-2 font-medium transition-colors duration-200">
         <IconArrowLeft class="w-5 h-5" />
@@ -52,11 +52,9 @@
           <div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm text-gray-700 mt-4">
             <p class="flex items-center" v-if="topCompany.name">
               <IconBuilding class="w-4 h-4 mr-1 text-primary" /> Entreprise populaire :
-              <NuxtLink :to="`/offer/company/${topCompany.id}/${topCompany.name}`" class="ml-1 font-medium hover:underline">
-                {{ topCompany.name }}
-              </NuxtLink>
-              ({{ topCompany.count }} offres)
+              <span class="ml-1 font-medium">{{ topCompany.name }}</span> ({{ topCompany.count }} offres)
             </p>
+
             <p class="flex items-center" v-if="topContract.type">
               <IconUsers class="w-4 h-4 mr-1 text-primary" /> Contrat populaire :
               <span class="ml-1 font-medium">{{ topContract.type }}</span> ({{ topContract.count }} offres)
@@ -137,7 +135,7 @@
           {{ filteredJobs.length }} offre{{ filteredJobs.length > 1 ? 's' : '' }} active{{ filteredJobs.length > 1 ? 's' : '' }} à {{ locationData?.name }}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <NuxtLink v-for="job in paginatedJobs" :key="job.id"
+          <div v-for="job in paginatedJobs" :key="job.id"
             :to="`/offer/${job.id}/${job.slug}`"
             class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col justify-between">
             <div>
@@ -165,12 +163,12 @@
               <p class="text-gray-600 text-sm line-clamp-3" v-html="job.summary"></p>
             </div>
             
-            <div class="flex justify-end mt-4">
+            <NuxtLink :to="`/offer/${job.id}/${job.slug}`" class="flex justify-end mt-4">
               <span class="text-primary hover:text-secondary flex items-center gap-1 text-sm font-medium">
                 Voir l'offre <IconArrowRight class="w-4 h-4" />
               </span>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
       </div>
 

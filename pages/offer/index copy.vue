@@ -60,8 +60,7 @@
       <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
         <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des offres.</p>
         <p class="text-red-600 text-sm">{{ error }}</p>
-        <button @click="refreshJobs"
-          class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
+        <button @click="refreshJobs" class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
           Réessayer
         </button>
       </div>
@@ -105,8 +104,7 @@
                 title="Cette offre a été modifiée récemment">
                 ✎ Modifiée
               </div>
-              <div v-else class="h-[20px]"></div> <button @click="toggleSidebar(job)"
-                class="p-2 rounded-full transition-colors duration-200"
+              <div v-else class="h-[20px]"></div> <button @click="toggleSidebar(job)" class="p-2 rounded-full transition-colors duration-200"
                 :class="isSidebarOpen && selectedJob?.id === job.id ? 'bg-primary text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'">
                 <IconInfoCircle class="h-5 w-5" />
               </button>
@@ -169,7 +167,8 @@
       </div>
     </main>
 
-    <div v-if="isSidebarOpen" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40" @click="closeSidebar">
+    <div v-if="isSidebarOpen" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+      @click="closeSidebar">
     </div>
 
     <transition name="slide">
@@ -185,20 +184,17 @@
                   alt="Logo Entreprise" class="w-10 h-10 object-cover rounded-full border border-gray-200"
                   @error="handleImageError" />
                 <NuxtLink :to="`https://suitops.netlify.app/company/${selectedJob.company.id}/${selectedJob.company.name}`" target="_blank"
-                  :title="`Consulter le profil de ${selectedJob.company.name}`"
-                  class="text-lg font-medium text-gray-800 hover:text-primary transition-colors">
+                  :title="`Consulter le profil de ${selectedJob.company.name}`" class="text-lg font-medium text-gray-800 hover:text-primary transition-colors">
                   {{ selectedJob.company.name }}
                 </NuxtLink>
               </div>
-              <button @click="closeSidebar"
-                class="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100">
+              <button @click="closeSidebar" class="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100">
                 <IconX class="w-6 h-6 transform transition duration-300 ease-in-out hover:rotate-90 hover:text-critique" />
               </button>
             </div>
             <div class="mt-3 flex items-center justify-between gap-2">
               <h2 class="text-xl font-bold text-primary leading-tight">{{ selectedJob.post }}</h2>
-              <button @click="openApplicationModalForSelectedJob"
-                class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg text-sm whitespace-nowrap transition-colors">
+              <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg text-sm whitespace-nowrap transition-colors">
                 Postuler
               </button>
             </div>
@@ -236,8 +232,6 @@
         </div>
       </aside>
     </transition>
-
-    <JobApplicationModal ref="jobApplicationModalRef" :target-url="currentJobRedirectUrl" />
   </div>
 </template>
 
@@ -249,17 +243,11 @@ import { fr } from 'date-fns/locale';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch, IconInfoCircle, IconLocation, IconUsers, IconCalendarX, IconX, IconArrowRight } from '@tabler/icons-vue';
 
-// Import the JobApplicationModal component
-import JobApplicationModal from '~/components/JobApplicationModal.vue';
-
 // --- Store et Données de base ---
 const jobsStore = useJobsStore();
 const { isLoading, error, filteredJobs: storeFilteredJobs, jobs } = storeToRefs(jobsStore);
 
-// Ref for the modal component
-const jobApplicationModalRef = ref<InstanceType<typeof JobApplicationModal> | null>(null);
-
-// Determine the unique contract types available
+// Détermine les types de contrat uniques disponibles
 const contractTypes = computed(() => {
   const typesSet = new Set<string>();
   jobs.value.forEach(job => {
@@ -270,20 +258,20 @@ const contractTypes = computed(() => {
   return Array.from(typesSet);
 });
 
-// --- Filter and Sort ---
+// --- Filtre et Tri ---
 const selectedContract = ref<string>('');
 const sortOption = ref<string>('default');
 
-// The `processedJobs` is the data source after applying filters and sorting
+// Le `processedJobs` est la source de données après application des filtres et du tri
 const processedJobs = computed(() => {
-  let result = storeFilteredJobs.value; // Already filtered by the store's search bar
+  let result = storeFilteredJobs.value; // Déjà filtré par la barre de recherche du store
 
-  // Filtering by contract type
+  // Filtrage par type de contrat
   if (selectedContract.value) {
     result = result.filter(job => job.contract === selectedContract.value);
   }
 
-  // Sorting results
+  // Tri des résultats
   switch (sortOption.value) {
     case 'alpha-asc':
       result = [...result].sort((a, b) => a.post.localeCompare(b.post));
@@ -291,26 +279,26 @@ const processedJobs = computed(() => {
     case 'alpha-desc':
       result = [...result].sort((a, b) => b.post.localeCompare(a.post));
       break;
-    case 'closingDateDesc': // Furthest closing date first
+    case 'closingDateDesc': // Date de clôture la plus éloignée en premier
       result = [...result].sort((a, b) =>
         new Date(b.closingDate).getTime() - new Date(a.closingDate).getTime()
       );
       break;
-    case 'closingDateAsc': // Closest closing date first
+    case 'closingDateAsc': // Date de clôture la plus proche en premier
       result = [...result].sort((a, b) =>
         new Date(a.closingDate).getTime() - new Date(b.closingDate).getTime()
       );
       break;
-    case 'placeNumberDesc': // More available positions first
+    case 'placeNumberDesc': // Plus de postes disponibles en premier
       result = [...result].sort((a, b) => b.placeNumber - a.placeNumber);
       break;
-    case 'placeNumberAsc': // Fewer available positions first
+    case 'placeNumberAsc': // Moins de postes disponibles en premier
       result = [...result].sort((a, b) => a.placeNumber - b.placeNumber);
       break;
     case 'default':
     default:
-      // Default option: can be sorted by most recent publication date or ID
-      // For now, it's the order returned by the store
+      // Option par défaut: peut être le tri par date de publication la plus récente ou ID
+      // Pour l'instant, c'est l'ordre retourné par le store
       break;
   }
   return result;
@@ -325,7 +313,7 @@ const paginatedJobs = computed(() => {
   return processedJobs.value.slice(start, start + itemsPerPage);
 });
 
-// Reset current page to 1 when filters change
+// Réinitialise la page actuelle à 1 lorsque les filtres changent
 watch([processedJobs, selectedContract, sortOption], () => {
   currentPage.value = 1;
 });
@@ -345,20 +333,20 @@ function prevPage() {
   }
 }
 
-// --- Date Formatting ---
+// --- Formatage de la Date ---
 const formatDate = (timestamp: number) =>
   format(new Date(timestamp), 'dd MMMM yyyy', { locale: fr });
 
-// --- Sidebar Management (Job Details) ---
+// --- Gestion de la Sidebar (Détails de l'offre) ---
 const isSidebarOpen = ref(false);
 const selectedJob = ref<any | null>(null);
 
 function toggleSidebar(job: any) {
   if (selectedJob.value?.id === job.id && isSidebarOpen.value) {
-    // If the same job is already selected and sidebar is open, close it
+    // Si la même offre est déjà sélectionnée et la sidebar ouverte, la fermer
     closeSidebar();
   } else {
-    // Otherwise, select this job and open the sidebar
+    // Sinon, sélectionner cette offre et ouvrir la sidebar
     selectedJob.value = job;
     isSidebarOpen.value = true;
   }
@@ -369,14 +357,14 @@ function closeSidebar() {
   selectedJob.value = null; // Clear selected job when closing sidebar
 }
 
-// --- Image Error Handling (for company logos) ---
+// --- Gestion d'erreur d'image (pour les logos d'entreprise) ---
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement;
   const name = target.alt || 'Logo Entreprise';
   target.src = `https://api.dicebear.com/7.x/initials/svg?seed=${name}`;
 };
 
-// --- Initial Job Load ---
+// --- Chargement initial des offres ---
 const refreshJobs = () => jobsStore.fetchJobs();
 onMounted(() => {
   refreshJobs();
@@ -390,19 +378,6 @@ watch(route, () => {
   closeSidebar();
 });
 
-// --- Modal Integration Logic ---
-const currentJobRedirectUrl = computed(() => {
-  if (selectedJob.value) {
-    return `https://hire.pgs.ctrlengine.com/offer/${selectedJob.value.id}/${selectedJob.value.slug}`;
-  }
-  return ''; // Return empty string if no job selected
-});
-
-const openApplicationModalForSelectedJob = () => {
-  if (jobApplicationModalRef.value && selectedJob.value) {
-    jobApplicationModalRef.value.openModal();
-  }
-};
 
 // --- SEO ---
 useHead({
@@ -416,14 +391,14 @@ useHead({
   ]
 });
 
-// --- CSS Classes for contract badges ---
+// --- Classes CSS pour les badges de contrat ---
 const getContractClass = (contract: string) => {
   switch (contract.toLowerCase()) {
     case 'cdi': return 'bg-green-100 text-green-800';
     case 'cdd': return 'bg-purple-100 text-purple-800';
     case 'stage': return 'bg-orange-100 text-orange-800';
-    case 'alternance': return 'bg-blue-100 text-blue-800';
-    case 'freelance': return 'bg-red-100 text-red-800';
+    case 'alternance': return 'bg-blue-100 text-blue-800'; 
+    case 'freelance': return 'bg-red-100 text-red-800'; 
     default: return 'bg-gray-100 text-gray-800';
   }
 };
@@ -444,8 +419,8 @@ const getContractClass = (contract: string) => {
 /* Styles pour les éléments HTML générés par v-html, pour s'assurer qu'ils sont lisibles */
 .text-sm div :deep(ul),
 .text-sm div :deep(ol) {
-  list-style-type: disc;
-  margin-left: 1.25rem;
+  list-style-type: disc; /* or decimal for ol */
+  margin-left: 1.25rem; /* 5 units in Tailwind */
   padding-left: 0.25rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -473,7 +448,6 @@ const getContractClass = (contract: string) => {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }

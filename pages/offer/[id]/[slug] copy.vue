@@ -1,11 +1,13 @@
 <template>
   <main class="p-4 sm:p-6 mt-6 min-h-screen">
+    <!-- Back Button -->
     <button @click="router.go(-1)"
       class="text-primary hover:text-secondary flex items-center gap-2 font-medium mb-6 transition-colors duration-200">
       <IconArrowLeft class="w-5 h-5" />
       Retour aux offres
     </button>
 
+    <!-- Loading State -->
     <div v-if="isLoading" class="flex justify-center items-center h-64">
       <div class="text-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -13,6 +15,7 @@
       </div>
     </div>
 
+    <!-- Error State -->
     <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
       <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement de l'offre.</p>
       <p class="text-red-600 text-sm">{{ error }}</p>
@@ -22,7 +25,9 @@
       </button>
     </div>
 
+    <!-- Job Details Content -->
     <div v-else-if="currentJob">
+      <!-- Header Section: Job Title, Company, Apply Button, Key Info -->
       <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div class="flex-1">
@@ -40,7 +45,7 @@
             </NuxtLink>
           </div>
           <div class="mt-4 sm:mt-0 flex-shrink-0">
-            <button @click="openApplicationModal"
+            <button
               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200">
               Postuler
             </button>
@@ -67,7 +72,9 @@
         </div>
       </div>
 
+      <!-- Main Content Area: Job Description, Tasks, Skills, Aptitudes -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column: Main Job Details -->
         <div class="lg:col-span-2 space-y-8">
           <div v-if="!hasDetails"
             class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-6 rounded-lg shadow-sm text-center">
@@ -100,7 +107,9 @@
           </div>
         </div>
 
+        <!-- Right Column: Company Info, Required Documents, Quiz Status -->
         <div class="space-y-8">
+          <!-- Company Info Card -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-4">À propos de l'entreprise</h2>
             <div class="space-y-4 text-gray-700">
@@ -129,9 +138,10 @@
             </div>
           </div>
 
+          <!-- Required Documents Section -->
           <div v-if="currentJob.requiredDocument && currentJob.requiredDocument.trim() !== '<p> </p>'"
             class="bg-white rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-4">Documents requis</h2>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Documents requis pour postuler</h2>
             <div class="prose max-w-none" v-html="currentJob.requiredDocument"></div>
           </div>
           <div v-else class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-6 rounded-lg shadow-sm">
@@ -139,6 +149,7 @@
               documents habituels via le formulaire de candidature.</p>
           </div>
 
+          <!-- Quiz Section (Modified as per request) -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-4">Évaluation technique (Quiz)</h2>
             <div v-if="currentJob.quizzes && currentJob.quizzes.length > 0"
@@ -155,6 +166,7 @@
       </div>
     </div>
 
+    <!-- No Job Found State -->
     <div v-else class="text-center py-12">
       <div class="max-w-md mx-auto">
         <div class="text-6xl mb-4">😔</div>
@@ -168,8 +180,6 @@
         </NuxtLink>
       </div>
     </div>
-
-    <JobApplicationModal ref="jobApplicationModalRef" :target-url="pgsRedirectUrl" />
   </main>
 </template>
 
@@ -180,18 +190,11 @@ import { IconArrowLeft, IconLocation, IconCalendar, IconUsers, IconMail, IconArr
 import { useJobsStore } from '~/stores/jobs';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { ref, computed } from 'vue'; // Import ref and computed
-
-// Import the new modal component
-import JobApplicationModal from '~/components/JobApplicationModal.vue';
 
 const route = useRoute();
 const router = useRouter();
 const jobsStore = useJobsStore();
 const { isLoading, error, currentJob } = storeToRefs(jobsStore);
-
-// Ref for the modal component
-const jobApplicationModalRef = ref<InstanceType<typeof JobApplicationModal> | null>(null);
 
 // --- Data Fetching ---
 const loadJob = async () => {
@@ -216,20 +219,6 @@ const hasDetails = computed(() => {
     currentJob.value?.aptitudes?.trim() !== '<p> </p>' && currentJob.value?.aptitudes?.trim() !== ''
   );
 });
-
-// Computed property for the PGS redirect URL
-const pgsRedirectUrl = computed(() => {
-  const id = route.params.id as string;
-  const slug = route.params.slug as string;
-  return `https://hire.pgs.ctrlengine.com/offer/${id}/${slug}`;
-});
-
-// Function to open the application modal
-const openApplicationModal = () => {
-  if (jobApplicationModalRef.value) {
-    jobApplicationModalRef.value.openModal();
-  }
-};
 
 // --- Helper for Contract Class ---
 const getContractClass = (contract: string) => {
