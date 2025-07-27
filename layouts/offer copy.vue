@@ -264,12 +264,6 @@ const logout = () => {
   router.push('/')
 }
 
-// --- Fonctions de Normalisation pour les Compteurs ---
-const normalizeLocation = (location: string) => {
-  let cleaned = location.trim().split(',')[0].trim();
-  return cleaned.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-};
-
 // Calcul des compteurs pour chaque catégorie de navigation
 const getAllOffersCount = computed(() => jobs.value.length)
 
@@ -284,25 +278,15 @@ const getCompanyOffersCount = computed(() => {
   return uniqueCompanyIds.size;
 });
 
-// MODIFICATION ICI : Utilisation de la normalisation pour le compteur de lieux
 const getLocationOffersCount = computed(() => {
-  const uniqueLocations = new Set<string>();
-  jobs.value.forEach(job => {
-    if (job.location) {
-      const normalized = normalizeLocation(job.location);
-      if (normalized) {
-        uniqueLocations.add(normalized);
-      }
-    }
-  });
-  return uniqueLocations.size;
+  return jobs.value.filter(job => job.location && job.location.trim() !== '').length;
 });
 
 // Liens de navigation avec les compteurs
 const navItems = [
   { path: '/offer', label: 'Toutes les offres', icon: IconLayoutDashboard, count: getAllOffersCount },
   { path: '/offer/company', label: 'Entreprises', icon: IconBuilding, count: getCompanyOffersCount },
-  { path: '/offer/location', label: 'Lieux', icon: IconMapPin, count: getLocationOffersCount }, // Mis à jour
+  { path: '/offer/location', label: 'Lieux', icon: IconMapPin, count: getLocationOffersCount },
   { path: '/offer/suggestions', label: 'Recommandations', icon: IconThumbUp },
   { path: '/offer/preference', label: 'Préférences', icon: IconSettings },
 ]
