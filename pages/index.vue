@@ -31,7 +31,7 @@
                 Mon espace candidat <span aria-hidden="true">→</span>
               </NuxtLink>
 
-              <a href="https://web.suitops.com/candidate" target="_blank" rel="noopener noreferrer"
+              <a href="https://web.pgs.ctrlengine.com/offers" target="_blank" rel="noopener noreferrer"
                 class="btnStyle inline-block border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors focus-visible:outline-gray-800 transform hover:-translate-y-0.5 duration-200">
                 Je suis recruteur
               </a>
