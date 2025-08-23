@@ -27,7 +27,11 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'PGS Hire - Plateforme moderne de recrutement intégrée à PGS' }
+        { name: 'description', content: 'PGS Hire - Plateforme moderne de recrutement intégrée à PGS' },
+        {
+          name: 'google-site-verification',
+          content: 'OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A'
+        }
       ]
     }
   },
