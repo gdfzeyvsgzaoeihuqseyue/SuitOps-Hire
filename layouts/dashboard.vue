@@ -137,6 +137,9 @@
       </div>
     </aside>
 
+    <!-- Notification -->
+    <SiteNotificationManager /> 
+    
     <div class="pt-16 p-4 lg:p-8 transition-all duration-300" :class="[
       // Desktop only - margin shifts content based on sidebar collapse state
       isCollapsed ? 'lg:ml-20' : 'lg:ml-64',

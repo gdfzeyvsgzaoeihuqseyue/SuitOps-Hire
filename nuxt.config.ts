@@ -17,7 +17,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      pgsApiBase: process.env.PGS_API_BASE_URL
+      suitipsApiBase: process.env.SUITOPS_API_URL,
+      pgsBaseAPI: process.env.PGS_API_URL,
+      siteIdentifier: process.env.NUXT_PUBLIC_SITE_IDENTIFIER || 'hire',
     }
   },
 

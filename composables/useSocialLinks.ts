@@ -14,7 +14,7 @@ export const useSocialLinks = async (mediaFilter?: string[]) => {
 
   const { data, error, pending } = await useFetch<{
     data: { media: string; link: string }[]
-  }>(`${config.public.pgsApiBase}/public/website/footer/links`, {
+  }>(`${config.public.suitipsApiBase}/public/website/footer/links`, {
     key: 'social-links'
   })
 

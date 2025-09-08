@@ -14,7 +14,7 @@ export const useBlogStore = defineStore('blog', () => {
 
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.pgsApiBase}/public/blog/post/all`)
+      const response = await fetch(`${config.public.suitipsApiBase}/public/blog/post/all`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -35,7 +35,7 @@ export const useBlogStore = defineStore('blog', () => {
 
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.pgsApiBase}/public/blog/post/${id}`)
+      const response = await fetch(`${config.public.suitipsApiBase}/public/blog/post/${id}`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
