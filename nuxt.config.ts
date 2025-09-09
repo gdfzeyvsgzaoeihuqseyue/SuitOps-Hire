@@ -30,7 +30,6 @@ export default defineNuxtConfig({
     display: 'swap',
     families: {
       'Dosis': [200, 300, 400, 500, 600, 700, 800],
-      'Smooch+Sans': [100, 200, 300, 400, 500, 600, 700, 800, 900],
       'Bree+Serif': [100, 200, 300, 400, 500, 600, 700, 800, 900],
     }
   },
