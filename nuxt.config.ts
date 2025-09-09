@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     }],
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    '@nuxtjs/google-fonts',
     '@vueuse/nuxt',
     '@nuxt/image',
     '@nuxtjs/robots',
@@ -19,7 +20,18 @@ export default defineNuxtConfig({
     public: {
       suitipsApiBase: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
+      betaMode: process.env.NUXT_BETA_MODE === 'true',
+      pgsSharedFiles: process.env.PGS_SHARED_FILES,
       siteIdentifier: process.env.NUXT_PUBLIC_SITE_IDENTIFIER || 'hire',
+    }
+  },
+
+  googleFonts: {
+    display: 'swap',
+    families: {
+      'Dosis': [200, 300, 400, 500, 600, 700, 800],
+      'Smooch+Sans': [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      'Bree+Serif': [100, 200, 300, 400, 500, 600, 700, 800, 900],
     }
   },
 

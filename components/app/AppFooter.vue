@@ -10,18 +10,9 @@
           <p class="mt-2 text-sm sm:text-base">La simplicité au service de votre carrière.</p>
 
           <!-- Liens sociaux -->
-          <div class="mt-4 space-x-4 flex justify-center sm:justify-start">
-            <span v-if="socialLoading" class="text-sm">Chargement des liens sociaux...</span>
-            <span v-else-if="socialError" class="text-critique text-sm">Erreur lors du chargement.</span>
-            <div v-else class="flex items-center gap-4">
-              <a v-for="item in socialLinks" :key="item.name" :href="item.href"
-                class="text-sm leading-6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                target="_blank" rel="noopener">
-                <span class="sr-only">{{ item.name }}</span>
-                <component :is="item.icon" class="h-6 w-6" aria-hidden="true" v-if="item.icon" />
-              </a>
-            </div>
-          </div>
+          <ul role="list" class="flex justify-center sm:justify-start space-x-4">
+            <SocialLink />
+          </ul>
           <p class="text-xs sm:text-sm mt-3 sm:mt-2">
             &copy; {{ new Date().getFullYear() }} SuitOps Hire. Tous droits réservés.
           </p>
@@ -54,7 +45,7 @@
               par
               <span
                 class="mx-1 sm:mx-2 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-textClr hover:bg-ash hover:text-primary transition-all">
-                <a href="https://progestionsoft.org" target="_blank" class="px-1">PRO GESTION SOFT</a>
+                <a :href="footerData?.brandUrl" target="_blank">{{ footerData?.brand }}</a>
               </span>
             </p>
           </div>
@@ -66,6 +57,16 @@
 
 <script setup lang="ts">
 import { NuxtLink } from '#components'
+import { useSharedFiles } from '~/stores/sharedFiles';
+
+const sharedFiles = useSharedFiles();
+
+// Récupérer les données du footer depuis le store
+type FooterData = { brand: string; brandUrl: string }
+const { data: footerData, pending, error } = await useAsyncData<FooterData>(
+  'footerData',
+  () => sharedFiles.getFooterData()
+)
 
 // Sections de navigation 
 const navSections: any[] = [
@@ -84,10 +85,6 @@ const navSections: any[] = [
     ]
   }
 ]
-
-// Réseaux sociaux
-const { filteredLinks: socialLinks, error: socialError, isLoading: socialLoading } =
-  await useSocialLinks(['Facebook', 'LinkedIn', 'Youtube'])
 </script>
 
 <style scoped>

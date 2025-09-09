@@ -16,6 +16,11 @@ export default {
         bgClr: '#e0f2fe',
         critique: '#ff0000'
       },
+       fontFamily: {
+        body: ['"Bree Serif"', 'sans-serif'],
+        sans: ['Dosis', 'sans-serif'],
+        heading: ['"Bree Serif"', 'sans-serif'],
+      },
     },
   },
   plugins: [

@@ -4,27 +4,31 @@
       <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <NuxtLink to="/" class="flex items-center gap-2 hover:scale-105 overflow-hidden transition-all duration-300">
           <div class="hidden lg:block">
-            <img src="/img/logoDeskCol.png" alt="Logo Desktop" class="h-8 w-auto sm:h-10 lg:h-12 dark:hidden" />
-            <img src="/img/logoDeskWhite.png" alt="Logo Desktop Dark" class="h-8 w-auto sm:h-10 lg:h-12 hidden dark:block" />
+            <img :src="sharedFiles.paths.logo.dc" alt="Logo" class="h-8 w-auto sm:h-10 lg:h-12 dark:hidden" />
+            <img :src="sharedFiles.paths.logo.dw" alt="Logo" class="h-8 w-auto sm:h-10 lg:h-12 hidden dark:block" />
           </div>
           <div class="lg:hidden flex-shrink-0 mr-3">
-            <img src="/img/logoMobCol.png" alt="Logo Desktop" class="h-8 w-auto sm:h-10 dark:hidden" />
-            <img src="/img/logoMobWhite.png" alt="Logo Desktop Dark" class="h-8 w-auto sm:h-10 hidden dark:block" />
+            <img :src="sharedFiles.paths.logo.mc" alt="Logo" class="h-8 w-auto sm:h-10 dark:hidden" />
+            <img :src="sharedFiles.paths.logo.mw" alt="Logo" class="h-8 w-auto sm:h-10 hidden dark:block" />
           </div>
         </NuxtLink>
 
         <div class="hidden lg:flex items-center space-x-4 gap-8">
-          <NuxtLink to="/offer" class="text-gray-700 hover:text-primary transition-colors duration-200">Offres</NuxtLink>
-          <NuxtLink to="/blog" class="text-gray-700 hover:text-primary transition-colors duration-200">Articles</NuxtLink>
+          <NuxtLink to="/offer" class="text-gray-700 hover:text-primary transition-colors duration-200">Offres
+          </NuxtLink>
+          <NuxtLink to="/blog" class="text-gray-700 hover:text-primary transition-colors duration-200">Articles
+          </NuxtLink>
 
           <div v-if="isAuthenticated">
             <div class="relative">
               <button @click="toggleProfileMenu" class="flex items-center gap-2 focus:outline-none">
-                <img class="h-8 w-8 rounded-full ring-2 ring-primary ring-offset-2" :src="userAvatar" :alt="userInitials" />
+                <img class="h-8 w-8 rounded-full ring-2 ring-primary ring-offset-2" :src="userAvatar"
+                  :alt="userInitials" />
               </button>
               <div v-if="showProfileMenu"
                 class="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg border border-gray-200 origin-top-right animate-fade-in-down">
-                <NuxtLink to="/dashboard/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                <NuxtLink to="/dashboard/profile"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
                   Mon profil
                 </NuxtLink>
                 <button @click="logout"
@@ -43,12 +47,15 @@
         </div>
 
         <div class="lg:hidden flex items-center">
-          <button @click="toggleMobileMenu" class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+          <button @click="toggleMobileMenu"
+            class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
             <span class="sr-only">Ouvrir le menu principal</span>
-            <svg v-if="!showMobileMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <svg v-if="!showMobileMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
-            <svg v-else class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <svg v-else class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -56,26 +63,37 @@
       </nav>
 
       <transition name="slide-in-left">
-        <div v-if="showMobileMenu" @click.self="closeMobileMenu" class="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50 flex justify-start">
-          <div class="bg-white w-3/4 sm:w-1/2 h-full shadow-lg flex flex-col items-center py-8 px-4 relative animate-slide-right">
-            <div class="absolute top-4 left-4"> <button @click="closeMobileMenu" class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+        <div v-if="showMobileMenu" @click.self="closeMobileMenu"
+          class="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50 flex justify-start">
+          <div
+            class="bg-white w-3/4 sm:w-1/2 h-full shadow-lg flex flex-col items-center py-8 px-4 relative animate-slide-right">
+            <div class="absolute top-4 left-4"> <button @click="closeMobileMenu"
+                class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                 <span class="sr-only">Fermer le menu</span>
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <NuxtLink to="/offer" class="text-gray-800 hover:text-primary text-xl font-semibold mb-4 w-full text-center py-2 rounded-md hover:bg-gray-50 transition-colors duration-200" @click="closeMobileMenu">Offres</NuxtLink>
-            <NuxtLink to="/blog" class="text-gray-800 hover:text-primary text-xl font-semibold mb-6 w-full text-center py-2 rounded-md hover:bg-gray-50 transition-colors duration-200" @click="closeMobileMenu">Articles</NuxtLink>
+            <NuxtLink to="/offer"
+              class="text-gray-800 hover:text-primary text-xl font-semibold mb-4 w-full text-center py-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
+              @click="closeMobileMenu">Offres</NuxtLink>
+            <NuxtLink to="/blog"
+              class="text-gray-800 hover:text-primary text-xl font-semibold mb-6 w-full text-center py-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
+              @click="closeMobileMenu">Articles</NuxtLink>
 
             <div v-if="isAuthenticated" class="flex flex-col items-center space-y-4 w-full">
               <button @click="toggleProfileMenu" class="flex items-center gap-2 focus:outline-none">
-                <img class="h-12 w-12 rounded-full ring-2 ring-primary ring-offset-2" :src="userAvatar" :alt="userInitials" />
+                <img class="h-12 w-12 rounded-full ring-2 ring-primary ring-offset-2" :src="userAvatar"
+                  :alt="userInitials" />
                 <span class="text-lg font-medium text-gray-800">{{ user?.firstName || 'Utilisateur' }}</span>
               </button>
               <div v-if="showProfileMenu"
                 class="w-full rounded-md bg-white shadow-inner border border-gray-100 text-center mt-2 p-2 animate-fade-in-down">
-                <NuxtLink to="/dashboard/profile" class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 transition-colors duration-200" @click="closeMobileMenu">
+                <NuxtLink to="/dashboard/profile"
+                  class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                  @click="closeMobileMenu">
                   Mon profil
                 </NuxtLink>
                 <button @click="logoutAndCloseMenu"
@@ -96,7 +114,7 @@
     </header>
 
     <!-- Notification -->
-    <SiteNotificationManager /> 
+    <SiteNotificationManager />
 
     <main class="pt-20">
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -111,12 +129,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const authStore = useAuthStore()
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const user = computed(() => authStore.user)
 const showProfileMenu = ref(false)
-const showMobileMenu = ref(false) 
+const showMobileMenu = ref(false)
 
 const userInitials = computed(() => {
   if (!user.value) return ''
@@ -178,10 +198,13 @@ const logoutAndCloseMenu = () => {
 /* Définition de l'animation pour le panneau venant de la gauche */
 @keyframes slideRight {
   from {
-    transform: translateX(-100%); /* Commence à -100% (hors de l'écran à gauche) */
+    transform: translateX(-100%);
+    /* Commence à -100% (hors de l'écran à gauche) */
   }
+
   to {
-    transform: translateX(0); /* Termine à 0 (position normale) */
+    transform: translateX(0);
+    /* Termine à 0 (position normale) */
   }
 }
 
@@ -195,6 +218,7 @@ const logoutAndCloseMenu = () => {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

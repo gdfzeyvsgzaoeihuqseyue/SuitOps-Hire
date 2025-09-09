@@ -1,38 +1,51 @@
-import { IconBrandLinkedin, IconBrandFacebook, IconBrandYoutube, IconBrandTwitter, IconBrandGithub, IconBrandTiktok } from '@tabler/icons-vue'
+import { computed, onMounted } from 'vue'; 
+import { useSocialLinksStore } from '@/stores/socialLinks'; 
 
-const iconMap: Record<string, any> = {
-  LinkedIn: IconBrandLinkedin,
-  Facebook: IconBrandFacebook,
-  Youtube: IconBrandYoutube,
-  Twitter: IconBrandTwitter,
-  Github: IconBrandGithub,
-  TikTok: IconBrandTiktok
+interface UseSocialLinksDisplayOptions {
+  filterMedia?: string[]; // Tableau optionnel de noms de médias à inclure (ex: ['facebook', 'linkedin'])
 }
 
-export const useSocialLinks = async (mediaFilter?: string[]) => {
-  const config = useRuntimeConfig()
 
-  const { data, error, pending } = await useFetch<{
-    data: { media: string; link: string }[]
-  }>(`${config.public.suitipsApiBase}/public/website/footer/links`, {
-    key: 'social-links'
-  })
+interface DisplayedSocialLink {
+  name: string;
+  href: string;
+  icon: any;
+  title: string;
+}
 
-  const filteredLinks = computed(() => {
-    if (!data.value?.data) return []
 
-    return data.value.data
-      .filter((item) => !mediaFilter || mediaFilter.includes(item.media))
-      .map((item) => ({
-        name: item.media,
-        href: item.link,
-        icon: iconMap[item.media] || null
-      }))
-  })
+export function useSocialLinksDisplay(options: UseSocialLinksDisplayOptions = {}) {
+  const socialLinksStore = useSocialLinksStore();
+
+  onMounted(() => {
+    if (socialLinksStore.links.length === 0 && !socialLinksStore.loading) {
+      socialLinksStore.fetchLinks();
+    }
+  });
+
+  const displayedLinks = computed<DisplayedSocialLink[]>(() => {
+   
+    const linksToFormat = socialLinksStore.filteredLinks(options.filterMedia ?? null);
+
+    if (!linksToFormat) {
+      return [];
+    }
+
+    return linksToFormat.map((link: { name: string; href: string; icon: any }) => {
+      const formattedName = link.name
+        ? link.name.charAt(0).toUpperCase() + link.name.slice(1).toLowerCase()
+        : ''; 
+
+      return {
+        ...link, 
+        title: formattedName, 
+      };
+    });
+  });
 
   return {
-    filteredLinks,
-    error,
-    isLoading: pending
-  }
+    displayedLinks,
+    loading: socialLinksStore.loading, 
+    error: socialLinksStore.error,  
+  };
 }

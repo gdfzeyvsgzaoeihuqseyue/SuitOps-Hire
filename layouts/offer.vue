@@ -14,16 +14,8 @@
       <div class="lg:hidden flex-shrink-0 mr-3">
         <NuxtLink to="/"
           class="flex items-center justify-center hover:scale-105 hover:opacity-80 transition-transform duration-300">
-          <img src="/img/logoMobCol.png" alt="Logo Mobile" class="h-8 w-auto dark:hidden" />
-          <img src="/img/logoMobWhite.png" alt="Logo Mobile Dark" class="h-8 w-auto hidden dark:block" />
-        </NuxtLink>
-      </div>
-
-      <div class="hidden lg:block transition-all duration-300" :class="isCollapsed ? 'max-w-0 overflow-hidden mr-0' : 'max-w-full mr-4'">
-         <NuxtLink to="/"
-          class="flex items-center justify-center hover:scale-105 hover:opacity-80 transition-transform duration-300">
-          <img src="/img/logoDeskCol.png" alt="Logo Desktop" class="h-8 w-auto dark:hidden" />
-          <img src="/img/logoDeskWhite.png" alt="Logo Desktop Dark" class="h-8 w-auto hidden dark:block" />
+          <img :src="sharedFiles.paths.logo.mc" alt="Logo" class="h-8 w-auto dark:hidden" />
+          <img :src="sharedFiles.paths.logo.mw" alt="Logo" class="h-8 w-auto hidden dark:block" />
         </NuxtLink>
       </div>
 
@@ -40,29 +32,34 @@
           </button>
 
           <div class="relative">
-            <button @click="toggleProfileMenu" class="flex rounded-full focus:outline-none ring-2 ring-transparent hover:ring-primary ring-offset-2 transition-all duration-200">
+            <button @click="toggleProfileMenu"
+              class="flex rounded-full focus:outline-none ring-2 ring-transparent hover:ring-primary ring-offset-2 transition-all duration-200">
               <img class="h-8 w-8 rounded-full" :src="userAvatar" :alt="userInitials" />
             </button>
 
             <div v-if="showProfileMenu"
               class="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg border border-gray-200 z-50 origin-top-right animate-fade-in-down">
               <div class="border-b border-gray-100">
-                <NuxtLink to="/dashboard/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                <NuxtLink to="/dashboard/profile"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                   @click="closeProfileMenu">
                   Mon profil
                 </NuxtLink>
-                <NuxtLink to="/dashboard/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                <NuxtLink to="/dashboard/settings"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                   @click="closeProfileMenu">
                   Paramètres
                 </NuxtLink>
               </div>
 
               <div class="border-b border-gray-100">
-                <NuxtLink to="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                <NuxtLink to="/dashboard"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                   @click="closeProfileMenu">
                   Tableau de bord
                 </NuxtLink>
-                <NuxtLink to="/dashboard/applications" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                <NuxtLink to="/dashboard/applications"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                   @click="closeProfileMenu">
                   Mes candidatures
                 </NuxtLink>
@@ -90,12 +87,9 @@
     </div>
 
     <aside class="fixed top-0 left-0 h-screen bg-white shadow-lg transition-all duration-300 flex flex-col z-50" :class="[
-      // Mobile behavior: slides in from left or is hidden off-screen
       isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full',
-      // Desktop behavior: width depends on isCollapsed state
-      'lg:translate-x-0', // Always visible on desktop
+      'lg:translate-x-0',
       isCollapsed ? 'lg:w-20' : 'lg:w-64',
-      // Default width for mobile (when open)
       'w-64'
     ]">
 
@@ -103,8 +97,8 @@
         <NuxtLink to="/"
           class="flex items-center justify-center hover:scale-105 hover:opacity-80 transition-transform duration-300"
           :class="isCollapsed ? 'lg:max-w-0 lg:overflow-hidden opacity-0' : 'lg:max-w-full opacity-100'">
-          <img src="/img/logoDeskCol.png" alt="Logo Desktop" class="h-8 w-auto dark:hidden" />
-          <img src="/img/logoDeskWhite.png" alt="Logo Desktop Dark" class="h-8 w-auto hidden dark:block" />
+          <img :src="sharedFiles.paths.logo.dc" alt="Logo" class="h-8 w-auto dark:hidden" />
+          <img :src="sharedFiles.paths.logo.dw" alt="Logo" class="h-8 w-auto hidden dark:block" />
         </NuxtLink>
 
         <button @click="toggleSidebar" class="hidden lg:block p-2 hover:bg-gray-100 rounded-full focus:outline-none">
@@ -118,11 +112,9 @@
 
       <nav class="mt-5 px-2 space-y-1 flex-1 overflow-y-auto pb-4">
         <NuxtLink v-for="item in navItems" :key="item.path" :to="item.path" :title="item.label"
-          class="group flex items-center p-2 text-sm rounded-lg transition-colors duration-200"
-          :class="route.path === item.path
-              ? 'bg-primary/10 text-primary font-medium' // Adjusted active state color
-              : 'text-gray-700 hover:bg-gray-50'"
-          @click="closeMobileSidebar">
+          class="group flex items-center p-2 text-sm rounded-lg transition-colors duration-200" :class="route.path === item.path
+            ? 'bg-primary/10 text-primary font-medium' // Adjusted active state color
+            : 'text-gray-700 hover:bg-gray-50'" @click="closeMobileSidebar">
           <component :is="item.icon" class="h-5 w-5 flex-shrink-0"
             :class="isCollapsed && !isMobileSidebarOpen ? 'lg:mx-auto' : 'mr-3'" />
           <span v-show="!isCollapsed || isMobileSidebarOpen" class="text-sm text-gray-700 truncate">
@@ -135,11 +127,12 @@
         </NuxtLink>
       </nav>
 
-      <div v-show="!isCollapsed || isMobileSidebarOpen" class="border-t border-gray-700 p-4 bg-gray-800 text-gray-400 space-y-4">
+      <div v-show="!isCollapsed || isMobileSidebarOpen"
+        class="border-t border-gray-700 p-4 bg-gray-800 text-gray-400 space-y-4">
         <div class="text-sm mb-3 grid grid-cols-1 gap-2 border-b border-gray-700 pb-4">
           <div v-for="link in footerLinks" :key="link.name">
-            <a v-if="link.external" :href="link.path" class="hover:text-white text-xs transition-colors duration-200" target="_blank"
-              rel="noopener noreferrer">
+            <a v-if="link.external" :href="link.path" class="hover:text-white text-xs transition-colors duration-200"
+              target="_blank" rel="noopener noreferrer">
               {{ link.label }}
             </a>
             <NuxtLink v-else :to="link.path" class="hover:text-white text-xs transition-colors duration-200">
@@ -148,23 +141,16 @@
           </div>
         </div>
 
-        <div class="flex justify-center">
-          <span v-if="socialLoading" class="text-gray-400 text-xs">Chargement...</span>
-          <span v-else-if="socialError" class="text-red-400 text-xs">Erreur de chargement.</span>
-          <div v-else class="flex items-center gap-3">
-            <a v-for="item in socialLinks" :key="item.name" :href="item.href" class="text-sm leading-6 hover:text-white transition-colors duration-200"
-              target="_blank" rel="noopener">
-              <span class="sr-only">{{ item.name }}</span>
-              <component :is="item.icon" class="h-4 w-4" aria-hidden="true" v-if="item.icon" />
-            </a>
-          </div>
-        </div>
+        <!-- Liens sociaux -->
+        <ul role="list" class="flex justify-center sm:justify-start space-x-4">
+          <SocialLink />
+        </ul>
 
         <div class="py-3 border-y border-gray-700">
           <p class="font-mono text-xs text-center">
             par <span
               class="mx-1 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-gray-50/30 hover:bg-blue-100 hover:text-blue-600 transition-all">
-              <NuxtLink to="https://progestionsoft.org" target="_blank">PRO GESTION SOFT</NuxtLink>
+              <a :href="footerData?.brandUrl" target="_blank">{{ footerData?.brand }}</a>
             </span>
           </p>
         </div>
@@ -176,12 +162,10 @@
     </aside>
 
     <!-- Notification -->
-    <SiteNotificationManager /> 
-    
+    <SiteNotificationManager />
+
     <div class="pt-16 p-4 lg:p-8 transition-all duration-300" :class="[
-      // Desktop only - margin shifts content based on sidebar collapse state
       isCollapsed ? 'lg:ml-20' : 'lg:ml-64',
-      // No margin on mobile when sidebar is closed/open as it's an overlay
       'ml-0'
     ]">
       <slot />
@@ -196,7 +180,9 @@ import { useAuthStore } from '~/stores/auth'
 import { useJobsStore } from '~/stores/jobs'
 import { storeToRefs } from 'pinia'
 import { IconBell, IconLayoutDashboard, IconMapPin, IconBuilding, IconThumbUp, IconSettings, IconMenu2, IconMenuDeep } from '@tabler/icons-vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
+const sharedFiles = useSharedFiles();
 const route = useRoute()
 const router = useRouter()
 
@@ -206,6 +192,13 @@ const user = computed(() => authStore.user)
 
 const jobsStore = useJobsStore()
 const { jobs } = storeToRefs(jobsStore)
+
+// Récupérer les données du footer depuis le store
+type FooterData = { brand: string; brandUrl: string }
+const { data: footerData, pending, error } = await useAsyncData<FooterData>(
+  'footerData',
+  () => sharedFiles.getFooterData()
+)
 
 const userInitials = computed(() => {
   if (!user.value) return ''
@@ -310,10 +303,6 @@ const navItems = [
   { path: '/offer/preference', label: 'Préférences', icon: IconSettings },
 ]
 
-// Autres liens et logique
-const { filteredLinks: socialLinks, error: socialError, isLoading: socialLoading } =
-  await useSocialLinks(['Facebook', 'LinkedIn', 'Youtube'])
-
 const footerLinks = [
   { name: 'rgpd', label: 'RGPD', path: '/rgpd', external: false },
   { name: 'cgu', label: 'CGU', path: '/cgu', external: false },
@@ -351,6 +340,7 @@ onMounted(() => {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

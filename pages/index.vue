@@ -11,7 +11,7 @@
         class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 flex flex-col lg:flex-row lg:px-8 lg:py-24 lg:gap-12 lg:items-center">
         <div
           class="order-2 lg:order-1 mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 text-center lg:text-left">
-          <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl font-body">
             Trouvez votre <span class="text-primary">prochain emploi</span> avec
             <span class="underline decoration-primary">SuitOps Hire</span>
           </h1>
@@ -42,7 +42,7 @@
         <div
           class="order-1 lg:order-2 mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:basis-2/3 lg:flex-none overflow-hidden justify-center">
           <div class="w-full flex-none">
-            <img src="https://pgsdocs.netlify.app/img/docs/postule.png" alt="SuitOps Hire"
+            <img :src="sharedFiles.paths.general.indexHero" alt="SuitOps Hire"
               class="w-full h-auto rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 object-contain max-h-[500px] sm:max-h-full">
           </div>
         </div>
@@ -143,14 +143,14 @@
 import { computed, onMounted } from 'vue';
 import { useJobsStore } from '~/stores/jobs';
 import { storeToRefs } from 'pinia';
-
 import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
+import { useSharedFiles } from '~/stores/sharedFiles';
 
-// --- Store et Données réelles ---
+const sharedFiles = useSharedFiles();
 const jobsStore = useJobsStore();
 const { jobs, isLoading, error } = storeToRefs(jobsStore);
 
-// Fonction pour formater les grands nombres (k, M) selon les règles spécifiées
+// Fonction pour formater les grands nombres
 const formatNumber = (num) => {
   if (num < 10) {
     return num.toString();
