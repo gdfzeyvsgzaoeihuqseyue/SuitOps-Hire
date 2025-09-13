@@ -11,7 +11,7 @@
 
           <!-- Liens sociaux -->
           <ul role="list" class="flex justify-center sm:justify-start space-x-4">
-            <SocialLink />
+            <SocialCustomLink />
           </ul>
           <p class="text-xs sm:text-sm mt-3 sm:mt-2">
             &copy; {{ new Date().getFullYear() }} SuitOps Hire. Tous droits réservés.
@@ -41,10 +41,17 @@
           <!-- Copyright -->
           <div
             class="flex flex-col sm:flex-row items-center border-t mt-4 pt-4 justify-center md:justify-end sm:justify-around text-center">
-            <p class="font-mono text-xs sm:text-sm">
+            <p class="font-mono text-xs sm:text-sm flex items-center">
               par
               <span
-                class="mx-1 sm:mx-2 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-textClr hover:bg-ash hover:text-primary transition-all">
+                class="mx-1 sm:mx-2 inline-flex items-center gap-2 px-2 py-1 rounded-full bg-transparent text-xs font-bold p-1 inline-block border border-textClr hover:bg-ash hover:text-primary transition-all">
+                <!-- Logo PGS -->
+                <div
+                  class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-100 overflow-hidden border border-gray-300">
+                  <img :src="sharedFiles.paths.logo.pgs" alt="PGS" class="w-4 h-4 object-contain" />
+                </div>
+
+                <!-- Marque -->
                 <a :href="footerData?.brandUrl" target="_blank">{{ footerData?.brand }}</a>
               </span>
             </p>
