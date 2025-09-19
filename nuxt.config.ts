@@ -22,9 +22,13 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    hostname: 'https://hire-suitops.netlify.app',
-    gzip: false,
-    exclude: [],
+    xslColumns: [
+      { label: 'URL', width: '50%' },
+      { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
+      { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
+      { label: 'Change Frequency', select: 'sitemap:changefreq', width: '12.5%' },
+       { label: 'Hreflangs', select: 'count(xhtml:link)', width: '25%' },
+    ],
   },
 
   runtimeConfig: {
