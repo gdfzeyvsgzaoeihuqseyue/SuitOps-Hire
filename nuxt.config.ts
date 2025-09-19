@@ -19,8 +19,12 @@ export default defineNuxtConfig({
   site: {
     url: 'https://hire-suitops.netlify.app',
     name: 'Hire SuitOps',
-    gzip: true,
-    xsl: false,
+  },
+
+  sitemap: {
+    hostname: 'https://hire-suitops.netlify.app',
+    gzip: false,
+    exclude: [],
   },
 
   runtimeConfig: {
