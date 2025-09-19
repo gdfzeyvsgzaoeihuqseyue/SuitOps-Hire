@@ -3,4 +3,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://hire-suitops.netlify.app/sitemap_index.xml
+Sitemap: https://hire-suitops.netlify.app/sitemap.xml
