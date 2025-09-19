@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: [
     ['nuxt-gtag', {
-      id: process.env.GTAG_ID || 'G-EQ1NZNBVB4', 
+      id: process.env.GTAG_ID || 'G-EQ1NZNBVB4',
       enabled: process.env.NODE_ENV === 'production'
     }],
     '@nuxtjs/tailwindcss',
@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
+
+  site: {
+    url: 'https://hire-suitops.netlify.app',
+    name: 'Hire SuitOps',
+    gzip: true,
+    xsl: false,
+  },
 
   runtimeConfig: {
     public: {
@@ -40,11 +47,16 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'PGS Hire - Plateforme moderne de recrutement intégrée à PGS' },
+        { name: 'author', content: 'Pro Gestion Soft' },
+        { name: 'keywords', content: 'Recrutement, SuitOps, Candidat, Emploie, Embauche, Bénin, PGS, Pro Gestion Soft' },
         {
           name: 'google-site-verification',
           content: 'OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A'
-        }
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.ico' },
+        { rel: 'canonical', href: 'https://hire-suitops.netlify.app' }
       ]
     }
   },
