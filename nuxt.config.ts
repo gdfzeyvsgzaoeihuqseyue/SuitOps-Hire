@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   modules: [
     ['nuxt-gtag', {
-      id: process.env.GTAG_ID || 'G-EQ1NZNBVB4',
+      id: process.env.GTAG_ID || 'G-21PEEF1SCX',
       enabled: process.env.NODE_ENV === 'production'
     }],
     '@nuxtjs/tailwindcss',
