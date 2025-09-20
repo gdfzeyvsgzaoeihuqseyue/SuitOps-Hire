@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
+
   modules: [
     ['nuxt-gtag', {
       id: process.env.GTAG_ID || 'G-EQ1NZNBVB4',
@@ -27,8 +28,22 @@ export default defineNuxtConfig({
       { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
       { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
       { label: 'Change Frequency', select: 'sitemap:changefreq', width: '12.5%' },
-       { label: 'Hreflangs', select: 'count(xhtml:link)', width: '25%' },
+      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '25%' },
     ],
+  },
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      ignore: [
+        '/dashboard',
+        '/dashboard/**',
+        '/auth',
+        '/auth/**',
+        '/blog',
+        '/blog/**',
+      ]
+    }
   },
 
   runtimeConfig: {
@@ -68,6 +83,7 @@ export default defineNuxtConfig({
       ]
     }
   },
+
   image: {
     quality: 80,
     format: ['webp']

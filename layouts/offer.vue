@@ -143,7 +143,7 @@
 
         <!-- Liens sociaux -->
         <ul role="list" class="flex justify-center sm:justify-start space-x-4">
-          <SocialLink />
+          <SocialCustomLink />
         </ul>
 
         <div class="py-3 border-y border-gray-700">
@@ -304,8 +304,8 @@ const navItems = [
 ]
 
 const footerLinks = [
-  { name: 'rgpd', label: 'RGPD', path: '/rgpd', external: false },
-  { name: 'cgu', label: 'CGU', path: '/cgu', external: false },
+  { name: 'rgpd', label: 'RGPD', path: '#', external: false },
+  { name: 'cgu', label: 'CGU', path: '#', external: false },
   { name: 'blog', label: 'Blog', path: '/blog', external: false },
   { name: 'doc', label: 'Documentation', path: 'https://pgsdocs.netlify.app/docs/category/pour-les-candidats', external: true }
 ]
