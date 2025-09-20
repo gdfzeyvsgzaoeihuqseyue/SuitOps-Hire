@@ -73,8 +73,7 @@ export default defineNuxtConfig({
         { name: 'author', content: 'Pro Gestion Soft' },
         { name: 'keywords', content: 'Recrutement, SuitOps, Candidat, Emploie, Embauche, Bénin, PGS, Pro Gestion Soft' },
         {
-          name: 'google-site-verification',
-          content: 'OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A'
+          name: 'google-site-verification', content: 'OdKxHpVkBSxk0mj4vD4OTmZPdVi5pWzyCu4QPIMHy9A'
         },
       ],
       link: [
