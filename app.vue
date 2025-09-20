@@ -16,15 +16,11 @@ const baseUrl = "https://hire-suitops.netlify.app";
 useHead({
   titleTemplate: '%s | SUITOPS HIRE',
   meta: [
-    { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     {
       key: 'description',
       name: 'description',
       content: 'Plateforme moderne de recrutement intégrée à PGS SuitOps.'
     },
-    { name: 'author', content: 'Pro Gestion Soft' },
-    { name: 'keywords', content: 'Recrutement, SuitOps, Candidat, Emploie, Embauche, Bénin, PGS, Pro Gestion Soft' },
 
     // Open Graph (Facebook, LinkedIn)
     { property: 'og:title', content: 'SuitOps Hire - Plateforme de Recrutement' },
