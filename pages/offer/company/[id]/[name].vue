@@ -60,16 +60,59 @@
           </div>
 
           <!-- Informations de contact et activité -->
-          <div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm text-gray-700 mt-4">
-            <p v-if="company.address" class="flex items-center">
-              <IconMapPin class="w-4 h-4 mr-1 text-primary" /> {{ company.address }}
-            </p>
-            <p v-if="company.mainActivity" class="flex items-center">
-              <IconBriefcase class="w-4 h-4 mr-1 text-primary" /> {{ company.mainActivity }}
-            </p>
-            <p v-if="company.emailAddress" class="flex items-center">
-              <IconMail class="w-4 h-4 mr-1 text-primary" /> {{ company.emailAddress }}
-            </p>
+          <div class="mt-4">
+            <!-- Version mobile -->
+            <div class="block md:hidden space-y-3">
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary" v-if="company.address">
+                <div class="flex items-center">
+                  <IconMapPin class="w-4 h-4 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium mb-1">Adresse</p>
+                    <p class="text-sm text-gray-900 leading-relaxed">{{ company.address }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary" v-if="company.mainActivity">
+                <div class="flex items-center">
+                  <IconBriefcase class="w-4 h-4 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium mb-1">Secteur d'activité</p>
+                    <p class="text-sm text-gray-900 leading-relaxed">{{ company.mainActivity }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary" v-if="company.emailAddress">
+                <div class="flex items-center">
+                  <IconMail class="w-4 h-4 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium mb-1">Contact</p>
+                    <a :href="`mailto:${company.emailAddress}`"
+                      class="text-sm text-primary hover:text-primary-dark underline break-all transition-colors duration-200">
+                      {{ company.emailAddress }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version desktop : layout horizontal original -->
+            <div class="hidden md:flex flex-wrap justify-start gap-x-6 gap-y-2 text-sm text-gray-700">
+              <p v-if="company.address" class="flex items-center">
+                <IconMapPin class="w-4 h-4 mr-1 text-primary" /> {{ company.address }}
+              </p>
+              <p v-if="company.mainActivity" class="flex items-center">
+                <IconBriefcase class="w-4 h-4 mr-1 text-primary" /> {{ company.mainActivity }}
+              </p>
+              <p v-if="company.emailAddress" class="flex items-center">
+                <IconMail class="w-4 h-4 mr-1 text-primary" />
+                <a :href="`mailto:${company.emailAddress}`"
+                  class="text-gray-700 hover:text-primary underline transition-colors duration-200">
+                  {{ company.emailAddress }}
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -154,7 +197,7 @@
       <div v-else>
         <p class="text-gray-600 text-center my-6">
           {{ filteredJobs.length }} offre{{ filteredJobs.length > 1 ? 's' : '' }} active{{ filteredJobs.length > 1 ? 's'
-          : '' }} chez {{ company?.name }}
+            : '' }} chez {{ company?.name }}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div v-for="job in paginatedJobs" :key="job.id"
@@ -174,7 +217,7 @@
                 </p>
                 <p class="flex items-center">
                   <IconUsers class="w-4 h-4 mr-1 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber !== 1 ?
-                  's' : '' }}
+                    's' : '' }}
                 </p>
                 <p class="flex items-center">
                   <IconLocation class="w-4 h-4 mr-1 text-primary" /> {{ job.location }}

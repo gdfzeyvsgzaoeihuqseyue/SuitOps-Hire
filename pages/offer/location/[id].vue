@@ -1,7 +1,8 @@
 <template>
   <div class="p-4 sm:p-6 mt-6 min-h-screen">
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-      <button @click="router.go(-1)" class="text-primary hover:text-secondary flex items-center gap-2 font-medium transition-colors duration-200">
+      <button @click="router.go(-1)"
+        class="text-primary hover:text-secondary flex items-center gap-2 font-medium transition-colors duration-200">
         <IconArrowLeft class="w-5 h-5" />
         Retour aux localisations
       </button>
@@ -18,7 +19,7 @@
 
     <header class="mb-8 bg-white rounded-lg shadow-md p-6 sm:p-8" v-if="locationData">
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-          <!-- Logo -->
+        <!-- Logo -->
         <img :src="`https://placehold.co/100x100/E0F2FE/0284C7?text=${encodeURIComponent(locationData.name)}`"
           :alt="locationData.name" class="w-24 h-24 rounded-full border object-cover" />
 
@@ -49,26 +50,64 @@
             </div>
           </div>
 
-          <div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm text-gray-700 mt-4">
-            <p class="flex items-center" v-if="topCompany.name">
-              <IconBuilding class="w-4 h-4 mr-1 text-primary" /> Entreprise populaire :
-              <span class="ml-1 font-medium">{{ topCompany.name }}</span> ({{ topCompany.count }} offres)
-            </p>
+          <div class="mt-4">
+            <!-- Version mobile -->
+            <div class="block md:hidden space-y-3">
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary" v-if="topCompany.name">
+                <div class="flex items-center">
+                  <IconBuilding class="w-4 h-4 mr-2 text-primary flex-shrink-0" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium">Entreprise populaire</p>
+                    <p class="text-sm font-semibold text-gray-900 truncate">{{ topCompany.name }}</p>
+                    <p class="text-xs text-gray-500">{{ topCompany.count }} offres</p>
+                  </div>
+                </div>
+              </div>
 
-            <p class="flex items-center" v-if="topContract.type">
-              <IconUsers class="w-4 h-4 mr-1 text-primary" /> Contrat populaire :
-              <span class="ml-1 font-medium">{{ topContract.type }}</span> ({{ topContract.count }} offres)
-            </p>
-            <p class="flex items-center">
-              <IconStar class="w-4 h-4 mr-1 text-primary" /> Nombre d'entreprises :
-              <span class="ml-1 font-medium">{{ uniqueCompaniesCount }}</span>
-            </p>
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary" v-if="topContract.type">
+                <div class="flex items-center">
+                  <IconUsers class="w-4 h-4 mr-2 text-primary flex-shrink-0" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium">Contrat populaire</p>
+                    <p class="text-sm font-semibold text-gray-900 truncate">{{ topContract.type }}</p>
+                    <p class="text-xs text-gray-500">{{ topContract.count }} offres</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-primary">
+                <div class="flex items-center">
+                  <IconStar class="w-4 h-4 mr-2 text-primary flex-shrink-0" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs text-gray-600 uppercase tracking-wide font-medium">Nombre d'entreprises</p>
+                    <p class="text-sm font-semibold text-gray-900">{{ uniqueCompaniesCount }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version desktop -->
+            <div class="hidden md:flex flex-wrap justify-start gap-x-6 gap-y-2 text-sm text-gray-700">
+              <p class="flex items-center" v-if="topCompany.name">
+                <IconBuilding class="w-4 h-4 mr-1 text-primary" /> Entreprise populaire :
+                <span class="ml-1 font-medium">{{ topCompany.name }}</span> ({{ topCompany.count }} offres)
+              </p>
+              <p class="flex items-center" v-if="topContract.type">
+                <IconUsers class="w-4 h-4 mr-1 text-primary" /> Contrat populaire :
+                <span class="ml-1 font-medium">{{ topContract.type }}</span> ({{ topContract.count }} offres)
+              </p>
+              <p class="flex items-center">
+                <IconStar class="w-4 h-4 mr-1 text-primary" /> Nombre d'entreprises :
+                <span class="ml-1 font-medium">{{ uniqueCompaniesCount }}</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </header>
 
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 p-4 border-b border-gray-200 bg-white rounded-lg shadow-sm">
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 p-4 border-b border-gray-200 bg-white rounded-lg shadow-sm">
       <div class="w-full md:w-2/3 lg:w-1/2">
         <div class="relative">
           <IconSearch class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -78,13 +117,15 @@
       </div>
 
       <div class="flex flex-col sm:flex-row items-start gap-4 w-full sm:w-auto">
-        <select v-model="contractFilter" class="rounded-md border-gray-300 focus:ring-2 focus:ring-primary py-2 px-3 pr-8 transition-colors duration-200 w-full sm:w-auto">
+        <select v-model="contractFilter"
+          class="rounded-md border-gray-300 focus:ring-2 focus:ring-primary py-2 px-3 pr-8 transition-colors duration-200 w-full sm:w-auto">
           <option value="">Tous les types de contrat</option>
           <option v-for="type in contractTypes" :key="type" :value="type">
             {{ type }}
           </option>
         </select>
-        <select v-model="sortOption" class="rounded-md border-gray-300 focus:ring-2 focus:ring-primary py-2 px-3 pr-8 transition-colors duration-200 w-full sm:w-auto">
+        <select v-model="sortOption"
+          class="rounded-md border-gray-300 focus:ring-2 focus:ring-primary py-2 px-3 pr-8 transition-colors duration-200 w-full sm:w-auto">
           <option value="default">Tri par défaut</option>
           <option value="alpha-asc">Titre du poste (A-Z)</option>
           <option value="alpha-desc">Titre du poste (Z-A)</option>
@@ -106,7 +147,8 @@
     <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
       <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des offres.</p>
       <p class="text-red-600 text-sm">{{ error }}</p>
-      <button @click="refreshLocationJobs" class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
+      <button @click="refreshLocationJobs"
+        class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
         Réessayer
       </button>
     </div>
@@ -132,16 +174,17 @@
 
       <div v-else>
         <p class="text-gray-600 text-center my-6">
-          {{ filteredJobs.length }} offre{{ filteredJobs.length > 1 ? 's' : '' }} active{{ filteredJobs.length > 1 ? 's' : '' }} à {{ locationData?.name }}
+          {{ filteredJobs.length }} offre{{ filteredJobs.length > 1 ? 's' : '' }} active{{ filteredJobs.length > 1 ? 's'
+          : '' }} à {{ locationData?.name }}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="job in paginatedJobs" :key="job.id"
-            :to="`/offer/${job.id}/${job.slug}`"
+          <div v-for="job in paginatedJobs" :key="job.id" :to="`/offer/${job.id}/${job.slug}`"
             class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4 gap-4">
                 <h2 class="text-xl font-semibold text-gray-900 leading-tight flex-1">{{ job.post }}</h2>
-                <span class="px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap" :class="getContractClass(job.contract)">
+                <span class="px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap"
+                  :class="getContractClass(job.contract)">
                   {{ job.contract }}
                 </span>
               </div>
@@ -151,7 +194,8 @@
                   <IconCalendar class="w-4 h-4 mr-1 text-primary" /> Clôture : {{ formatDate(job.closingDate) }}
                 </p>
                 <p class="flex items-center">
-                  <IconUsers class="w-4 h-4 mr-1 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber !== 1 ? 's' : '' }}
+                  <IconUsers class="w-4 h-4 mr-1 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber !== 1 ?
+                  's' : '' }}
                 </p>
                 <p class="flex items-center">
                   <IconBuilding class="w-4 h-4 mr-1 text-primary" />
@@ -162,10 +206,11 @@
               </div>
               <p class="text-gray-600 text-sm line-clamp-3" v-html="job.summary"></p>
             </div>
-            
+
             <NuxtLink :to="`/offer/${job.id}/${job.slug}`" class="flex justify-end mt-4">
               <span class="text-primary hover:text-secondary flex items-center gap-1 text-sm font-medium">
-                Voir l'offre <IconArrowRight class="w-4 h-4" />
+                Voir l'offre
+                <IconArrowRight class="w-4 h-4" />
               </span>
             </NuxtLink>
           </div>
@@ -274,9 +319,9 @@ const filteredJobs = computed(() =>
     const search = searchQuery.value.toLowerCase();
     // Search by post title, profile, company name, or summary
     const matchesSearch = job.post.toLowerCase().includes(search) ||
-                          job.profile.toLowerCase().includes(search) ||
-                          job.company.name.toLowerCase().includes(search) ||
-                          job.summary.toLowerCase().includes(search);
+      job.profile.toLowerCase().includes(search) ||
+      job.company.name.toLowerCase().includes(search) ||
+      job.summary.toLowerCase().includes(search);
 
     // Filter by contract type
     const matchesContract = !contractFilter.value || job.contract === contractFilter.value;
@@ -390,6 +435,7 @@ useSeoMeta({
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

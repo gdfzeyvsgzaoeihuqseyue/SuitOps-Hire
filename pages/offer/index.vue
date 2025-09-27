@@ -94,7 +94,8 @@
           <div v-for="job in paginatedJobs" :key="job.id"
             class="bg-white rounded-lg shadow-md p-6 relative transition-all duration-300 hover:shadow-lg hover:scale-[1.01]"
             :class="{ 'lg:blur-sm lg:pointer-events-none': isSidebarOpen && selectedJob?.id !== job.id }">
-            <div class="absolute top-0 right-4 -translate-y-1/2 px-3 py-1 text-xs font-medium rounded-full shadow-sm z-10"
+            <div
+              class="absolute top-0 right-4 -translate-y-1/2 px-3 py-1 text-xs font-medium rounded-full shadow-sm z-10"
               :class="getContractClass(job.contract)">
               {{ job.contract }}
             </div>
@@ -113,9 +114,10 @@
             </div>
 
             <div class="flex flex-col items-start gap-3 mb-4">
-              <NuxtLink :to="`https://suitops.netlify.app/company/${job.company.id}/${job.company.name}`" target="_blank"
-                class="flex items-center gap-3 group">
-                <img :src="job.company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${job.company.name}`"
+              <NuxtLink :to="`https://suitops.netlify.app/company/${job.company.id}/${job.company.name}`"
+                target="_blank" class="flex items-center gap-3 group">
+                <img
+                  :src="job.company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${job.company.name}`"
                   alt="Logo Entreprise" class="w-12 h-12 object-cover rounded-full border border-gray-200 flex-shrink-0"
                   @error="handleImageError" />
                 <div>
@@ -131,8 +133,9 @@
 
             <div class="mb-4 text-gray-600 text-sm space-y-2 border-y border-gray-200 py-3">
               <div class="flex items-center">
-                <IconUsers class="w-4 h-4 mr-2 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber > 1 ? 's' :
-                '' }}
+                <IconUsers class="w-4 h-4 mr-2 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber > 1 ? 's'
+                  :
+                  '' }}
               </div>
               <div class="flex items-center">
                 <IconLocation class="w-4 h-4 mr-2 text-primary" /> {{ job.location }}
@@ -144,10 +147,15 @@
 
             <p class="text-gray-600 text-sm mt-2 line-clamp-3" v-html="job.summary"></p>
 
-            <div class="flex justify-end mt-4">
+            <!-- Actions -->
+            <div class="flex items-center justify-between mt-4">
+              <span class="text-xs text-gray-500">
+                Publié le {{ formatDate(job.createdAt) }}
+              </span>
               <NuxtLink :to="`/offer/${job.id}/${job.slug}`"
                 class="text-primary hover:text-secondary font-medium text-sm flex items-center gap-1 transition-colors">
-                Voir l'offre <IconArrowRight class="w-4 h-4" />
+                Voir l'offre
+                <IconArrowRight class="w-4 h-4" />
               </NuxtLink>
             </div>
           </div>
@@ -174,8 +182,8 @@
 
     <transition name="slide">
       <aside v-if="isSidebarOpen"
-        class="fixed top-0 right-0 h-full bg-white border-l shadow-xl overflow-y-auto z-50 transition-transform duration-300 ease-in-out"
-        :class="isSidebarOpen ? 'translate-x-0 w-full sm:w-96 lg:w-80' : 'translate-x-full'">
+        class="fixed top-0 right-0 h-full bg-white border-l shadow-xl overflow-y-auto z-50 transition-transform duration-300 ease-in-out w-[80%] sm:w-96 lg:w-80"
+        :class="isSidebarOpen ? 'translate-x-0' : 'translate-x-full'">
         <div v-if="selectedJob" class="h-full flex flex-col">
           <header class="sticky top-0 bg-white z-10 border-b p-4 shadow-sm">
             <div class="flex items-center justify-between">
@@ -184,15 +192,17 @@
                   :src="selectedJob.company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${selectedJob.company.name}`"
                   alt="Logo Entreprise" class="w-10 h-10 object-cover rounded-full border border-gray-200"
                   @error="handleImageError" />
-                <NuxtLink :to="`https://suitops.netlify.app/company/${selectedJob.company.id}/${selectedJob.company.name}`" target="_blank"
-                  :title="`Consulter le profil de ${selectedJob.company.name}`"
+                <NuxtLink
+                  :to="`https://suitops.netlify.app/company/${selectedJob.company.id}/${selectedJob.company.name}`"
+                  target="_blank" :title="`Consulter le profil de ${selectedJob.company.name}`"
                   class="text-lg font-medium text-gray-800 hover:text-primary transition-colors">
                   {{ selectedJob.company.name }}
                 </NuxtLink>
               </div>
               <button @click="closeSidebar"
                 class="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100">
-                <IconX class="w-6 h-6 transform transition duration-300 ease-in-out hover:rotate-90 hover:text-critique" />
+                <IconX
+                  class="w-6 h-6 transform transition duration-300 ease-in-out hover:rotate-90 hover:text-critique" />
               </button>
             </div>
             <div class="mt-3 flex items-center justify-between gap-2">

@@ -243,7 +243,7 @@ const benefits = [
   },
 ]
 
-// SEO (Nuxt 3 uses `useSeoMeta` for more detailed control)
+// SEO
 useSeoMeta({
   title: 'SuitOps Hire - Trouvez votre prochain emploi au Bénin et au-delà',
   ogTitle: 'SuitOps Hire - Votre Partenaire Carrière',

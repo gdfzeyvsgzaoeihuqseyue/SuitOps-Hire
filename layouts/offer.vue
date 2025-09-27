@@ -148,8 +148,16 @@
 
         <div class="py-3 border-y border-gray-700">
           <p class="font-mono text-xs text-center">
-            par <span
-              class="mx-1 bg-transparent text-xs font-bold p-1 rounded-lg inline-block border border-gray-50/30 hover:bg-blue-100 hover:text-blue-600 transition-all">
+            par 
+            <span
+              class="mx-1 sm:mx-2 inline-flex items-center gap-2 px-2 py-1 rounded-full bg-transparent text-xs font-bold p-1 inline-block border border-textClr hover:bg-blue-100 hover:text-primary transition-all">
+              <!-- Logo PGS -->
+              <div
+                class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-100 overflow-hidden border border-gray-300">
+                <img :src="sharedFiles.paths.logo.pgs" alt="PGS" class="w-4 h-4 object-contain" />
+              </div>
+
+              <!-- Marque -->
               <a :href="footerData?.brandUrl" target="_blank">{{ footerData?.brand }}</a>
             </span>
           </p>
