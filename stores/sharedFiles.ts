@@ -17,23 +17,23 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
   const paths = {
     // IMAGES
     logo: {
-      dc: `${SHARED_URL}/Logos/Hire-DC.png`,
-      dw: `${SHARED_URL}/Logos/Hire-DW.png`,
-      mc: `${SHARED_URL}/Logos/Hire-MC.png`,
-      mw: `${SHARED_URL}/Logos/Hire-MW.png`,
-      pgs: `${SHARED_URL}/Logos/PGS-MC.png`,
+      dc: `${SHARED_URL}/_General/Logos/Hire-DC.png`,
+      dw: `${SHARED_URL}/_General/Logos/Hire-DW.png`,
+      mc: `${SHARED_URL}/_General/Logos/Hire-MC.png`,
+      mw: `${SHARED_URL}/_General/Logos/Hire-MW.png`,
+      pgs: `${SHARED_URL}/_General/Logos/PGS-MC.png`,
     },
     general: {
-      error403: `${SHARED_URL}/General/Error403.png`,
-      error404: `${SHARED_URL}/General/Error404.png`,
-      error500: `${SHARED_URL}/General/Error500.png`,
+      error403: `${SHARED_URL}/_General/Error/403.png`,
+      error404: `${SHARED_URL}/_General/Error/404.png`,
+      error500: `${SHARED_URL}/_General/Error/500.png`,
       indexHero: `${SHARED_URL}/Hire_SuitOps/indexHero.png`,
     },
 
     //JSON
     data: {
-      footer: `${SHARED_URL}/JSON/pgs.json`,
-      custom: `${SHARED_URL}/JSON/custom.json`
+      footer: `${SHARED_URL}/_Docs/JSON/pgs.json`,
+      custom: `${SHARED_URL}/_Docs/JSON/custom.json`
     }
   };
 
