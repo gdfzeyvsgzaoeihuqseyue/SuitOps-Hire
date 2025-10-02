@@ -32,19 +32,19 @@ export default defineNuxtConfig({
     ],
   },
 
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      ignore: [
-        '/dashboard',
-        '/dashboard/**',
-        '/auth',
-        '/auth/**',
-        '/blog',
-        '/blog/**',
-      ]
-    }
-  },
+  // nitro: {
+  //   prerender: {
+  //     crawlLinks: true,
+  //     ignore: [
+  //       '/dashboard',
+  //       '/dashboard/**',
+  //       '/auth',
+  //       '/auth/**',
+  //       '/blog',
+  //       '/blog/**',
+  //     ]
+  //   }
+  // },
 
   runtimeConfig: {
     public: {

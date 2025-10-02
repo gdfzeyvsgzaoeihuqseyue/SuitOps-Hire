@@ -123,6 +123,7 @@
     </main>
 
     <AppFooter />
+    <GlobalFeedbackButton />
   </div>
 </template>
 
