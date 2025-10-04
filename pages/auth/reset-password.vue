@@ -4,6 +4,10 @@
       <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
         Définir un nouveau mot de passe
       </h2>
+      <span v-if="config.public.betaMode"
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        BETA
+      </span>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -61,6 +65,7 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { IconCheck } from '@tabler/icons-vue'
 
+const config = useRuntimeConfig();
 const router = useRouter()
 const route = useRoute()
 const token = route.query.token

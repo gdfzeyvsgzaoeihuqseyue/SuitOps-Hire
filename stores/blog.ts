@@ -17,9 +17,9 @@ export const useBlogStore = defineStore('blog', () => {
   const fetchBlogs = async (options?: {
     page?: number
     limit?: number
-    categorySlug?: string
+    categories?: string[]  // Filtrer par noms de catégories
     authorId?: string
-    tags?: string[]
+    searchQuery?: string  // Recherche dans title et excerpt
     sortBy?: 'date-desc' | 'date-asc' | 'alpha-asc' | 'alpha-desc'
   }) => {
     isLoading.value = true
@@ -31,11 +31,7 @@ export const useBlogStore = defineStore('blog', () => {
       
       if (options?.page) params.append('page', options.page.toString())
       if (options?.limit) params.append('limit', options.limit.toString())
-      if (options?.categorySlug) params.append('categorySlug', options.categorySlug)
       if (options?.authorId) params.append('authorId', options.authorId)
-      if (options?.tags && options.tags.length > 0) {
-        params.append('tags', JSON.stringify(options.tags))
-      }
 
       const response = await fetch(`${config.public.pgsBaseAPI}/blog/article?${params.toString()}`)
       
@@ -45,30 +41,51 @@ export const useBlogStore = defineStore('blog', () => {
       
       const data: BlogsResponse = await response.json()
       
-      // Tri côté client si nécessaire
-      let sortedBlogs = [...data.data]
+      // Filtrage côté client
+      let filteredBlogs = [...data.data]
       
+      // Filtrer par catégories (obligatoire - seulement les catégories autorisées)
+      if (options?.categories && options.categories.length > 0) {
+        filteredBlogs = filteredBlogs.filter(blog => 
+          blog.category && options.categories?.includes(blog.category.name)
+        )
+      }
+      
+      // Filtrer par recherche dans title et excerpt
+      if (options?.searchQuery && options.searchQuery.trim()) {
+        const query = options.searchQuery.toLowerCase().trim()
+        filteredBlogs = filteredBlogs.filter(blog => {
+          const titleMatch = blog.title.toLowerCase().includes(query)
+          const excerptMatch = blog.excerpt?.toLowerCase().includes(query) || false
+          return titleMatch || excerptMatch
+        })
+      }
+      
+      // Tri
       if (options?.sortBy) {
         switch (options.sortBy) {
           case 'date-desc':
-            sortedBlogs.sort((a, b) => b.createdAt - a.createdAt)
+            filteredBlogs.sort((a, b) => b.createdAt - a.createdAt)
             break
           case 'date-asc':
-            sortedBlogs.sort((a, b) => a.createdAt - b.createdAt)
+            filteredBlogs.sort((a, b) => a.createdAt - b.createdAt)
             break
           case 'alpha-asc':
-            sortedBlogs.sort((a, b) => a.title.localeCompare(b.title, 'fr'))
+            filteredBlogs.sort((a, b) => a.title.localeCompare(b.title, 'fr'))
             break
           case 'alpha-desc':
-            sortedBlogs.sort((a, b) => b.title.localeCompare(a.title, 'fr'))
+            filteredBlogs.sort((a, b) => b.title.localeCompare(a.title, 'fr'))
             break
         }
       }
       
-      blogs.value = sortedBlogs
-      totalArticles.value = data.nb
-      currentPage.value = data.currentPage
-      totalPages.value = data.totalPages
+      blogs.value = filteredBlogs
+      totalArticles.value = filteredBlogs.length
+      currentPage.value = options?.page || 1
+      
+      // Recalculer le total de pages basé sur les résultats filtrés
+      const limit = options?.limit || 9
+      totalPages.value = Math.ceil(filteredBlogs.length / limit)
       
     } catch (e: any) {
       error.value = 'Erreur lors du chargement des articles de blog'

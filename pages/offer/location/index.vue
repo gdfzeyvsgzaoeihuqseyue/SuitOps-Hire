@@ -123,7 +123,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed, ref, watch } from 'vue';
-import { useJobsStore } from '~/stores/jobs';
+import { useJobsStore } from '~/stores/job';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch, IconLocation } from '@tabler/icons-vue';
 

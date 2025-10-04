@@ -49,7 +49,7 @@
       </div>
     </section>
 
-    <section class="bg-gray-50 py-24 sm:py-32">
+    <section v-if="!jobsStore.isLoading && !jobsStore.error && jobsStore.jobs.length > 0" class="bg-gray-50 py-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div v-if="jobsStore.isLoading" class="text-center py-8">
           <p class="text-gray-600">Chargement des statistiques...</p>
@@ -141,7 +141,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useJobsStore } from '~/stores/jobs';
+import { useJobsStore } from '~/stores/job';
 import { storeToRefs } from 'pinia';
 import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
 import { useSharedFiles } from '~/stores/sharedFiles';

@@ -10,6 +10,10 @@
           retourner à la page de connexion
         </NuxtLink>
       </p>
+      <span v-if="config.public.betaMode"
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+        BETA
+      </span>      
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -56,6 +60,7 @@
 import { ref } from 'vue'
 import { IconMailCheck } from '@tabler/icons-vue'
 
+const config = useRuntimeConfig();
 const email = ref('')
 const emailSent = ref(false)
 

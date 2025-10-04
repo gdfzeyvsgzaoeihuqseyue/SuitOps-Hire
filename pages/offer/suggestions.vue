@@ -161,8 +161,8 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useJobsStore } from '~/stores/jobs';
-import { format, differenceInDays } from 'date-fns'; // Added differenceInDays
+import { useJobsStore } from '~/stores/job';
+import { format, differenceInDays } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { IconRefresh, IconSearch, IconLocation, IconUsers, IconCalendar, IconArrowRight } from '@tabler/icons-vue';
 

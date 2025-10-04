@@ -253,7 +253,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
-import { useJobsStore } from '~/stores/jobs';
+import { useJobsStore } from '~/stores/job';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { storeToRefs } from 'pinia';

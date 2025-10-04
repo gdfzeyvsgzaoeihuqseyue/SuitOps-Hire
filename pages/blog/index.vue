@@ -11,9 +11,9 @@
       <!-- Filtres -->
       <div class="mt-8 space-y-4">
         <div class="flex flex-col sm:flex-row gap-4">
-          <!-- Recherche par tags -->
+          <!-- Recherche dans titre et excerpt -->
           <div class="flex-1">
-            <input v-model="searchTags" type="text" placeholder="Rechercher par tags (séparés par des virgules)..."
+            <input v-model="searchQuery" type="text" placeholder="Rechercher dans les articles..."
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               @keyup.enter="applyFilters" />
           </div>
@@ -169,17 +169,20 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
-import { useBlogStore } from '~/stores/blogs'
+import { useBlogStore } from '~/stores/blog'
 
 const blogStore = useBlogStore()
-const searchTags = ref('')
+const searchQuery = ref('')
 const sortBy = ref<'date-desc' | 'date-asc' | 'alpha-asc' | 'alpha-desc'>('date-desc')
+
+// Catégories autorisées (filtrage automatique)
+const ALLOWED_CATEGORIES = ['SuitOps', 'Employabilité', 'Général']
 
 onMounted(async () => {
   await blogStore.fetchBlogs({
     page: 1,
     limit: 9,
-    categorySlug: 'suitops', // Slug de la catégorie SuitOps
+    categories: ALLOWED_CATEGORIES,
     sortBy: sortBy.value
   })
 })
@@ -189,26 +192,22 @@ const formatDate = (timestamp: number) => {
 }
 
 const applyFilters = async () => {
-  const tags = searchTags.value
-    ? searchTags.value.split(',').map(t => t.trim()).filter(t => t)
-    : []
-
   await blogStore.fetchBlogs({
     page: 1,
     limit: 9,
-    tags: tags.length > 0 ? tags : undefined,
-    categorySlug: 'suitops',
+    categories: ALLOWED_CATEGORIES,
+    searchQuery: searchQuery.value || undefined,
     sortBy: sortBy.value
   })
 }
 
 const resetFilters = async () => {
-  searchTags.value = ''
+  searchQuery.value = ''
   sortBy.value = 'date-desc'
   await blogStore.fetchBlogs({
     page: 1,
     limit: 9,
-    categorySlug: 'suitops',
+    categories: ALLOWED_CATEGORIES,
     sortBy: 'date-desc'
   })
 }
@@ -216,15 +215,11 @@ const resetFilters = async () => {
 const changePage = async (page: number) => {
   if (page < 1 || page > blogStore.totalPages) return
 
-  const tags = searchTags.value
-    ? searchTags.value.split(',').map(t => t.trim()).filter(t => t)
-    : []
-
   await blogStore.fetchBlogs({
     page,
     limit: 9,
-    tags: tags.length > 0 ? tags : undefined,
-    categorySlug: 'suitops',
+    categories: ALLOWED_CATEGORIES,
+    searchQuery: searchQuery.value || undefined,
     sortBy: sortBy.value
   })
 
