@@ -57,7 +57,7 @@
         <div v-else-if="jobsStore.error" class="text-center py-8 text-critique">
           <p>Erreur de chargement des statistiques. Veuillez réessayer plus tard.</p>
         </div>
-        
+
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-center items-stretch">
           <div v-for="stat in dynamicStatistics" :key="stat.label"
             class="flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl bg-white shadow-sm min-h-[200px]">
@@ -66,7 +66,7 @@
             <p v-if="stat.note" class="mt-2 text-center text-sm text-gray-500 italic">{{ stat.note }}</p>
           </div>
         </div>
-        </div>
+      </div>
     </section>
 
     <section class="bg-white py-24 sm:py-32">
@@ -194,7 +194,7 @@ const dynamicStatistics = computed(() => [
   {
     value: formatNumber(estimatedCareersLaunched.value),
     label: "Carrières lancées",
-    note: "Estimation basée sur l'activité de la plateforme." 
+    note: "Estimation basée sur l'activité de la plateforme."
   },
 ]);
 

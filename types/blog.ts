@@ -1,60 +1,57 @@
-export interface BlogAuthor {
-  id: number;
-  lastname: string;
-  firstname: string;
-  emailAddress: string;
-  phoneNumber: string;
-  accountStatus: string;
-  isMainSuperAdmin: boolean;
-  right: any; 
-  loginCounter: number;
-  wants2FAuth: boolean;
-  code2FAuth: string;
-  code2FAuthExpiresAt: number;
-  passwordResetCode: string;
-  passwordResetCodeExpiresAt: number;
-  lastSeenAt: number | null;
-  createdBy: number | null;
-  lastUpdatedBy: number | null;
-  photo: string | null; 
-  createdAt: number;
-  updatedAt: number;
+export interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
 }
 
-export interface BlogImage {
-  createdAt: number;
-  updatedAt: number;
-  id: number;
+export interface BlogAuthorInfo {
+  id: string;
+  name: string;
   slug: string;
-  reference: string;
-  url: string;
-  type: string;
-  status: string;
-  file: {
-    uploadMime: string;
-    uploadFd: string;
-    size: number;
-  };
-  createdBy: number;
-  lastUpdatedBy: number;
+  avatar?: string;
+  role?: string;
+  bio?: string;
+  social?: Record<string, string>;
 }
 
 export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  imageUrl: string;
+  tags: string[];
+  views: number;
   createdAt: number;
   updatedAt: number;
-  id: number;
-  author: string; 
-  title: string;
-  object: string; 
-  content: string;
-  reads: number;
-  status: string;
-  createdBy: BlogAuthor;
-  lastUpdatedBy: BlogAuthor;
-  image: BlogImage;
+  category: BlogCategory;
+  author: BlogAuthorInfo;
 }
 
 export interface BlogsResponse {
+  success: boolean;
+  message: string;
   nb: number;
+  nbOnPage: number;
+  currentPage: number;
+  totalPages: number;
   data: BlogPost[];
+}
+
+export interface SingleBlogResponse {
+  success: boolean;
+  message: string;
+  data: BlogPost;
+}
+
+export interface BlogAuthorDetail extends BlogAuthorInfo {
+  articleCount: number;
+  articles: BlogPost[];
+}
+
+export interface AuthorResponse {
+  success: boolean;
+  message: string;
+  data: BlogAuthorDetail;
 }

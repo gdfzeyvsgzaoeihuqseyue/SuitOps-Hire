@@ -178,6 +178,8 @@
     ]">
       <slot />
     </div>
+    
+    <GlobalFeedbackButton />
   </main>
 </template>
 

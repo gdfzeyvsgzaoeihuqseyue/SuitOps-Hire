@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Job, JobsResponse } from '~/types/job'
+import type { Job, JobsResponse } from '~/types'
 
 export const useJobsStore = defineStore('jobs', () => {
   const jobs = ref<Job[]>([])
@@ -34,7 +34,7 @@ export const useJobsStore = defineStore('jobs', () => {
     
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.suitipsApiBase}/joboffer/all`)
+      const response = await fetch(`${config.public.suitopsApiBase}/joboffer/all`)
       const data: JobsResponse = await response.json()
       jobs.value = data.data
     } catch (e) {
@@ -52,7 +52,7 @@ export const useJobsStore = defineStore('jobs', () => {
 
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.suitipsApiBase}/joboffer/${id}`)
+      const response = await fetch(`${config.public.suitopsApiBase}/joboffer/${id}`)
       const { data } = await response.json()
       currentJob.value = data
     } catch (e) {

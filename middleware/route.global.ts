@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   // Routes privées
   const privateRoutes = [
-    '/blog'
+    '/other'
   ].map(route => withoutTrailingSlash(route));
 
   // Normalisation du chemin

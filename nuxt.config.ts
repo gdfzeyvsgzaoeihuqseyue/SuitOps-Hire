@@ -32,23 +32,9 @@ export default defineNuxtConfig({
     ],
   },
 
-  // nitro: {
-  //   prerender: {
-  //     crawlLinks: true,
-  //     ignore: [
-  //       '/dashboard',
-  //       '/dashboard/**',
-  //       '/auth',
-  //       '/auth/**',
-  //       '/blog',
-  //       '/blog/**',
-  //     ]
-  //   }
-  // },
-
   runtimeConfig: {
     public: {
-      suitipsApiBase: process.env.SUITOPS_API_URL,
+      suitopsApiBase: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,
       betaMode: process.env.NUXT_BETA_MODE === 'true',
       pgsSharedFiles: process.env.PGS_SHARED_FILES,
