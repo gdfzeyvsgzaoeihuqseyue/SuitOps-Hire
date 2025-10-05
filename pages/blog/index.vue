@@ -2,7 +2,7 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Blog SuitOps</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Articles de blog</h1>
         <p class="mt-4 text-lg leading-8 text-gray-600">
           Découvrez nos derniers articles, conseils et actualités sur le recrutement
         </p>
@@ -254,7 +254,7 @@ const visiblePages = computed(() => {
 
 // SEO
 useHead({
-  title: 'Blog - Articles et Actualités',
+  title: 'Articles et Actualités',
   meta: [
     { name: 'description', content: 'Découvrez nos derniers articles, conseils et actualités sur le recrutement et les ressources humaines' }
   ]
