@@ -71,12 +71,9 @@
             class="flex flex-col items-start bg-white hover:shadow-lg transition-shadow rounded-2xl overflow-hidden border border-gray-100">
             <div class="relative w-full">
               <NuxtLink :to="`/blog/${post.slug}`">
-                <img 
-                  :src="post.imageUrl || `https://placehold.co/600x400/0284c7/FFFFFF/png?text=${encodeURIComponent(post.title)}`" 
-                  :alt="post.title" 
-                  class="aspect-[16/9] w-full bg-gray-100 object-cover"
-                  loading="lazy" 
-                />
+                <img
+                  :src="post.imageUrl || `https://placehold.co/600x400/0284c7/FFFFFF/png?text=${encodeURIComponent(post.title)}`"
+                  :alt="post.title" class="aspect-[16/9] w-full bg-gray-100 object-cover" loading="lazy" />
               </NuxtLink>
             </div>
 
@@ -121,8 +118,8 @@
 
               <!-- Author -->
               <div class="relative mt-6 flex items-center gap-x-3 pt-4 border-t border-gray-100">
-                <img :src="post.author.avatar || 'https://api.dicebear.com/9.x/avataaars/svg?seed=' + post.author.name"
-                  :alt="post.author.name" class="h-10 w-10 rounded-full bg-gray-100 object-cover" loading="lazy" />
+                <BlogAuthorAvatar :avatar="post.author.avatar" :author-slug="post.author.slug"
+                  :author-name="post.author.name" custom-class="h-10 w-10 rounded-full bg-gray-100 object-cover" />
                 <div class="text-sm leading-5">
                   <p class="font-semibold text-gray-900">
                     <a :href="`https://progestionsoft.netlify.app/blog/author/${post.author.slug}`" target="_blank"
@@ -175,7 +172,7 @@ const blogStore = useBlogStore()
 const searchQuery = ref('')
 const sortBy = ref<'date-desc' | 'date-asc' | 'alpha-asc' | 'alpha-desc'>('date-desc')
 
-// Catégories autorisées (filtrage automatique)
+// Catégories autorisées
 const ALLOWED_CATEGORIES = ['SuitOps', 'Employabilité', 'Général']
 
 onMounted(async () => {

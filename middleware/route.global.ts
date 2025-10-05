@@ -1,33 +1,40 @@
-import { useRuntimeConfig } from '#app';
-import { withoutTrailingSlash } from 'ufo';
+import { useRuntimeConfig, createError, abortNavigation, navigateTo } from '#app'
+import { withoutTrailingSlash } from 'ufo'
 
-export default defineNuxtRouteMiddleware((to, from) => {
-  const config = useRuntimeConfig();
-  const isBetaMode = config.public.betaMode;
+export default defineNuxtRouteMiddleware((to) => {
+  const config = useRuntimeConfig()
+  const isBetaMode = config.public?.betaMode
+  const normalizedPath = withoutTrailingSlash(to.path)
 
-  // Dossier privé
-  if (isBetaMode && to.path.startsWith('/dashboard')) {
-    return navigateTo('/maintenance');
+  // Rediriger /dashboard
+  if (normalizedPath === '/dashboard' || normalizedPath.startsWith('/dashboard/')) {
+    return navigateTo('/maintenance')
   }
 
-  // Routes privées
-  const privateRoutes = [
-    '/other'
-  ].map(route => withoutTrailingSlash(route));
+  // Si le mode bêta est actif bloquer /blog
+  if (isBetaMode && normalizedPath.startsWith('/nothing')) {
+    const err = createError({
+      statusCode: 403,
+      statusMessage: 'Accès Interdit',
+      fatal: true,
+    })
 
-  // Normalisation du chemin
-  const normalizedPath = withoutTrailingSlash(to.path);
+    if (process.server) throw err
+    return abortNavigation(err)
+  }
 
-  // Si le mode bêta est activé
+  // Autres routes privées
   if (isBetaMode) {
-    const isPrivate = privateRoutes.includes(normalizedPath);
-
-    if (isPrivate) {
-      throw createError({
+    const privateRoutes = ['/other'].map(r => withoutTrailingSlash(r))
+    if (privateRoutes.includes(normalizedPath)) {
+      const err = createError({
         statusCode: 403,
-        statusMessage: "Accès Interdit",
+        statusMessage: 'Accès Interdit',
         fatal: true,
-      });
+      })
+
+      if (process.server) throw err
+      return abortNavigation(err)
     }
   }
-});
+})

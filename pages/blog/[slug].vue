@@ -63,9 +63,9 @@
           <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm">
             <!-- Author -->
             <div class="flex items-center gap-2">
-              <img
-                :src="blogStore.currentBlog.author.avatar || 'https://api.dicebear.com/9.x/avataaars/svg?seed=' + blogStore.currentBlog.author.name"
-                :alt="blogStore.currentBlog.author.name" class="h-12 w-12 rounded-full bg-gray-50 object-cover" />
+              <BlogAuthorAvatar :avatar="blogStore.currentBlog.author.avatar"
+                :author-slug="blogStore.currentBlog.author.slug" :author-name="blogStore.currentBlog.author.name"
+                custom-class="h-12 w-12 rounded-full bg-gray-50 object-cover" />
               <div class="text-left">
                 <a :href="`https://progestionsoft.netlify.app/blog/author/${blogStore.currentBlog.author.slug}`"
                   target="_blank" rel="noopener noreferrer"

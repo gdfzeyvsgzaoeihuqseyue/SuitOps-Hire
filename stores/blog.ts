@@ -7,7 +7,7 @@ export const useBlogStore = defineStore('blog', () => {
   const isLoading = ref(false)
   const error = ref<string | null>(null)
   const currentBlog = ref<BlogPost | null>(null)
-  
+
   // Pagination
   const totalArticles = ref(0)
   const currentPage = ref(1)
@@ -28,29 +28,29 @@ export const useBlogStore = defineStore('blog', () => {
     try {
       const config = useRuntimeConfig()
       const params = new URLSearchParams()
-      
+
       if (options?.page) params.append('page', options.page.toString())
       if (options?.limit) params.append('limit', options.limit.toString())
       if (options?.authorId) params.append('authorId', options.authorId)
 
       const response = await fetch(`${config.public.pgsBaseAPI}/blog/article?${params.toString()}`)
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      
+
       const data: BlogsResponse = await response.json()
-      
+
       // Filtrage côté client
       let filteredBlogs = [...data.data]
-      
+
       // Filtrer par catégories (obligatoire - seulement les catégories autorisées)
       if (options?.categories && options.categories.length > 0) {
-        filteredBlogs = filteredBlogs.filter(blog => 
+        filteredBlogs = filteredBlogs.filter(blog =>
           blog.category && options.categories?.includes(blog.category.name)
         )
       }
-      
+
       // Filtrer par recherche dans title et excerpt
       if (options?.searchQuery && options.searchQuery.trim()) {
         const query = options.searchQuery.toLowerCase().trim()
@@ -60,7 +60,7 @@ export const useBlogStore = defineStore('blog', () => {
           return titleMatch || excerptMatch
         })
       }
-      
+
       // Tri
       if (options?.sortBy) {
         switch (options.sortBy) {
@@ -78,15 +78,15 @@ export const useBlogStore = defineStore('blog', () => {
             break
         }
       }
-      
+
       blogs.value = filteredBlogs
       totalArticles.value = filteredBlogs.length
       currentPage.value = options?.page || 1
-      
+
       // Recalculer le total de pages basé sur les résultats filtrés
       const limit = options?.limit || 9
       totalPages.value = Math.ceil(filteredBlogs.length / limit)
-      
+
     } catch (e: any) {
       error.value = 'Erreur lors du chargement des articles de blog'
       console.error('Error fetching blogs:', e)
@@ -103,14 +103,14 @@ export const useBlogStore = defineStore('blog', () => {
     try {
       const config = useRuntimeConfig()
       const response = await fetch(`${config.public.pgsBaseAPI}/blog/article/${slug}`)
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      
+
       const data: SingleBlogResponse = await response.json()
       currentBlog.value = data.data
-      
+
     } catch (e: any) {
       error.value = 'Erreur lors du chargement de l\'article'
       console.error('Error fetching blog by slug:', e)
