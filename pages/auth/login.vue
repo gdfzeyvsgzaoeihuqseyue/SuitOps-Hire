@@ -1,10 +1,10 @@
 <template>
   <div class="bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">
         Connectez-vous à votre compte
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
+      <p class="mt-2 text-sm text-gray-600">
         Ou
         <NuxtLink to="/auth/signup" class="font-medium text-primary hover:text-secondary">
           créez un nouveau compte

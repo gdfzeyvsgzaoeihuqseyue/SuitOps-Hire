@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">
         Définir un nouveau mot de passe
       </h2>
       <span v-if="config.public.betaMode"
