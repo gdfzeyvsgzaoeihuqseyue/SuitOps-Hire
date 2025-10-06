@@ -11,22 +11,14 @@ export default defineNuxtRouteMiddleware((to) => {
     return navigateTo('/maintenance')
   }
 
-  // Si le mode bêta est actif bloquer /blog
-  if (isBetaMode && normalizedPath.startsWith('/nothing')) {
-    const err = createError({
-      statusCode: 403,
-      statusMessage: 'Accès Interdit',
-      fatal: true,
-    })
-
-    if (process.server) throw err
-    return abortNavigation(err)
-  }
-
   // Autres routes privées
   if (isBetaMode) {
     const privateRoutes = ['/other'].map(r => withoutTrailingSlash(r))
-    if (privateRoutes.includes(normalizedPath)) {
+    const isFolderRoute = normalizedPath.startsWith('/nothing')
+    const isPrivate = privateRoutes.includes(normalizedPath)
+
+     // Bloquer les routes interdites
+    if (isFolderRoute || isPrivate) {
       const err = createError({
         statusCode: 403,
         statusMessage: 'Accès Interdit',

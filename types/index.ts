@@ -1,4 +1,4 @@
 export * from './blog'
 export * from './job'
 export * from './siteInfo'
-export * from './sociallinks'
+export * from './socialLinks'
