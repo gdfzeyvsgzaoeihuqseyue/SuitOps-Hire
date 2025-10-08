@@ -28,11 +28,7 @@
         <!-- Back Button -->
         <div class="mb-8">
           <NuxtLink to="/blog" class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition">
-            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd"
-                d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
-                clip-rule="evenodd" />
-            </svg>
+            <IconArrowLeft class="w-5 h-5" />
             Retour aux articles
           </NuxtLink>
         </div>
@@ -43,7 +39,7 @@
             <!-- Category Badge -->
             <div class="flex justify-center">
               <span
-                class="inline-flex items-center rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600">
+                class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                 {{ blogStore.currentBlog.category.name }}
               </span>
             </div>
@@ -89,10 +85,7 @@
 
             <!-- Reading Time -->
             <span class="flex items-center gap-1 text-gray-600">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <IconClock class="w-5 h-5" />
               {{ readingTime }} min de lecture
             </span>
 
@@ -100,12 +93,7 @@
 
             <!-- Views -->
             <span class="flex items-center gap-1 text-gray-600">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
+              <IconEye class="w-5 h-5" />
               {{ blogStore.currentBlog.views }} vue{{ blogStore.currentBlog.views > 1 ? 's' : '' }}
             </span>
           </div>
@@ -138,50 +126,33 @@
               <button @click="shareOnFacebook"
                 class="p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
                 title="Partager sur Facebook">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
+                <IconBrandFacebook class="w-5 h-5" />
               </button>
 
               <!-- Twitter -->
               <button @click="shareOnTwitter" class="p-2 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition"
                 title="Partager sur Twitter">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                </svg>
+                <IconBrandX class="w-5 h-5" />
               </button>
 
               <!-- LinkedIn -->
               <button @click="shareOnLinkedIn"
                 class="p-2 rounded-full bg-blue-700 text-white hover:bg-blue-800 transition"
                 title="Partager sur LinkedIn">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
+                <IconBrandLinkedin class="w-5 h-5" />
               </button>
 
               <!-- Email -->
               <button @click="shareByEmail" class="p-2 rounded-full bg-gray-600 text-white hover:bg-gray-700 transition"
                 title="Partager par email">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+                <IconMail class="w-5 h-5" />
               </button>
 
               <!-- Copy Link -->
               <button @click="copyLink" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
                 :title="linkCopied ? 'Lien copié!' : 'Copier le lien'">
-                <svg v-if="!linkCopied" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+                <IconCopy v-if="!linkCopied" class="w-5 h-5" />
+                <IconCopyCheck v-else class="w-5 h-5 text-primary" />
               </button>
             </div>
           </div>
@@ -200,6 +171,7 @@
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { useBlogStore } from '~/stores/blog'
+import { IconClock, IconEye, IconBrandFacebook, IconBrandLinkedin, IconBrandX, IconMail, IconCopy, IconCopyCheck, IconArrowLeft } from '@tabler/icons-vue'
 
 const blogStore = useBlogStore()
 const route = useRoute()

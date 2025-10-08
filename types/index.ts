@@ -1,4 +1,5 @@
 export * from './blog'
 export * from './job'
+export * from './NoahBot'
 export * from './siteInfo'
 export * from './socialLinks'

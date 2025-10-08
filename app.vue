@@ -3,10 +3,13 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <NOAHChatModal />
   </div>
 </template>
 
 <script setup lang="ts">
+import { NOAHChatModal } from '@/components/noahBot'
+
 const runtimeConfig = useRuntimeConfig();
 const sharedFilesUrl = runtimeConfig.public.pgsSharedFiles;
 

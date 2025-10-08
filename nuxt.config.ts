@@ -33,6 +33,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    mistralApiKey: process.env.MISTRAL_API_KEY,
+    geminiApiKey: process.env.GEMINI_API_KEY,
+    
     public: {
       suitopsApiBase: process.env.SUITOPS_API_URL,
       pgsBaseAPI: process.env.PGS_API_URL,

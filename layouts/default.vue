@@ -50,14 +50,8 @@
           <button @click="toggleMobileMenu"
             class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
             <span class="sr-only">Ouvrir le menu principal</span>
-            <svg v-if="!showMobileMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <svg v-else class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <IconMenuDeep v-if="!showMobileMenu" class="h-6 w-6" />
+            <IconXboxX v-else class="h-6 w-6" />
           </button>
         </div>
       </nav>
@@ -70,10 +64,7 @@
             <div class="absolute top-4 left-4"> <button @click="closeMobileMenu"
                 class="p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                 <span class="sr-only">Fermer le menu</span>
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                  aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <IconX class="w-6 h-6" />
               </button>
             </div>
             <NuxtLink to="/offer"
@@ -128,6 +119,7 @@
 </template>
 
 <script setup lang="ts">
+import { IconXboxX, IconMenuDeep, IconX } from '@tabler/icons-vue';
 import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
 import { useSharedFiles } from '~/stores/sharedFiles';

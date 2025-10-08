@@ -82,16 +82,11 @@
                 <time :datetime="new Date(post.createdAt).toISOString()" class="text-gray-500">
                   {{ formatDate(post.createdAt) }}
                 </time>
-                <span class="relative z-10 rounded-full bg-blue-50 px-3 py-1.5 font-medium text-blue-600">
+                <span class="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-medium text-primary">
                   {{ post.category.name }}
                 </span>
                 <span class="flex items-center gap-1 text-gray-500">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
+                   <IconEye class="w-4 h-4" />
                   {{ post.views }}
                 </span>
               </div>
@@ -167,6 +162,7 @@
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { useBlogStore } from '~/stores/blog'
+import { IconEye } from '@tabler/icons-vue'
 
 const blogStore = useBlogStore()
 const searchQuery = ref('')
