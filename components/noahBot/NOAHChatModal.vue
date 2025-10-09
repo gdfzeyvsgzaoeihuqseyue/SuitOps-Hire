@@ -59,7 +59,7 @@
             <div v-if="chatbotStore.messages.length === 0" class="text-center text-gray-500 mt-20">
               <IconSparkles class="w-12 h-12 mx-auto mb-4 text-primary" />
               <p class="font-semibold mb-2">Bonjour! Comment puis-je vous aider?</p>
-              <p class="text-sm">Posez-moi des questions sur SuitOps HIRE de PGS</p>
+              <p class="text-sm">Posez-moi des questions sur PRO GESTION SOFT</p>
 
               <!-- Suggestions dynamiques -->
               <div class="mt-6 space-y-2">
@@ -72,8 +72,10 @@
             </div>
 
             <!-- Messages -->
-            <ChatMessage v-for="message in chatbotStore.messages" :key="message.id" :message="message"
-              @regenerate="handleRegenerate" @edit="handleEdit" />
+            <ChatMessage v-for="(message, index) in chatbotStore.messages" :key="message.id" :message="message"
+              :is-last-user-message="isLastUserMessage(index)"
+              :is-last-assistant-message="isLastAssistantMessage(index)" @regenerate="handleRegenerate"
+              @edit="handleEdit" />
 
             <!-- Loading Indicator -->
             <div v-if="chatbotStore.isLoading" class="flex items-start space-x-2">
@@ -167,6 +169,26 @@ const isMobile = ref(false);
 const showNotification = ref(false);
 const notificationMessage = ref('');
 const showResetConfirmation = ref(false);
+
+const isLastUserMessage = (index: number) => {
+  const messages = chatbotStore.messages;
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'user') {
+      return i === index;
+    }
+  }
+  return false;
+};
+
+const isLastAssistantMessage = (index: number) => {
+  const messages = chatbotStore.messages;
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'assistant') {
+      return i === index;
+    }
+  }
+  return false;
+};
 
 onMounted(() => {
   chatbotStore.initConversation(window.location.pathname);

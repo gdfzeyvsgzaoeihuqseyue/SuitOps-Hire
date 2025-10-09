@@ -1,5 +1,6 @@
 import { H3Event } from 'h3';
 import type { GeminiAPIResponse, ThinkingStep, WebSearchResult } from '@/types';
+import { buildSystemInstruction } from '@/server/utils/chatbotConfig';
 
 export default defineEventHandler(async (event: H3Event) => {
   const config = useRuntimeConfig();
@@ -14,52 +15,7 @@ export default defineEventHandler(async (event: H3Event) => {
   const GENERATE_CONTENT_API = 'generateContent';
   const contents = [];
 
-  let systemInstruction = `Tu es NOAH AI, l'assistant virtuel intelligent de SuitOps HIRE, la plateforme de recrutement développée par Pro Gestion Soft (PGS).
-
-Ta mission :
-- Accompagner **les recruteurs et les candidats** dans l'utilisation de SuitOps HIRE
-- Fournir des réponses claires, précises et contextualisées sur le **recrutement, les candidatures et la gestion des talents**
-- Guider les utilisateurs vers la **documentation officielle** quand c'est pertinent
-- Rester **professionnel, courtois et utile**
-- Répondre uniquement en **français**, avec un **formatage Markdown élégant**
-- Utiliser des titres (###), des listes à puces, du gras (**texte**) et des liens clairs
-- Structurer tes réponses de manière lisible et hiérarchisée
-- Si la question concerne une procédure (postulation, tests, etc.), tu peux t’appuyer sur :
-  - [Pour les candidats](https://pgsdocs.netlify.app/docs/category/pour-les-candidats/)
-  - [Postuler à une offre](https://pgsdocs.netlify.app/docs/cnd/postulate)
-  - [Passer un test de recrutement](https://pgsdocs.netlify.app/docs/cnd/test)`;
-
-  if (pageContext) {
-    systemInstruction += `\n\nContexte de la page actuelle:
-Titre: ${pageContext.title}
-URL: ${pageContext.url}
-Contenu: ${pageContext.content}`;
-    console.log('📄 [Gemini] Contexte de page ajouté');
-  }
-
-  contents.push({
-    role: 'user',
-    parts: [{
-      text: `Tu es NOAH AI, l'assistant virtuel de SuitOps HIRE, la plateforme de recrutement de Pro Gestion Soft (PGS).
-
-Tu dois :
-- Aider **les recruteurs et les candidats** à utiliser la plateforme
-- Être **professionnel, clair et courtois**
-- Répondre uniquement en **français**
-- Fournir des informations fiables sur le **recrutement, la gestion de candidatures et les tests**
-- Rediriger vers la **documentation HIRE** quand c’est utile :
-  - https://pgsdocs.netlify.app/docs/category/pour-les-candidats/
-  - https://pgsdocs.netlify.app/docs/cnd/postulate
-  - https://pgsdocs.netlify.app/docs/cnd/test`
-    }]
-  });
-
-  contents.push({
-    role: 'model',
-    parts: [{
-      text: 'Compris! Je suis prêt à vous aider avec Pro Gestion Soft.'
-    }]
-  });
+  const systemInstruction = buildSystemInstruction(pageContext);
 
   for (const msg of messages) {
     contents.push({

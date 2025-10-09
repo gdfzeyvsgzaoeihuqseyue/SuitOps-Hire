@@ -1,5 +1,6 @@
 import { H3Event } from 'h3';
 import type { MistralConversationResponse, ThinkingStep, WebSearchResult } from '@/types';
+import { buildSystemInstruction } from '@/server/utils/chatbotConfig';
 
 export default defineEventHandler(async (event: H3Event) => {
   const config = useRuntimeConfig();
@@ -10,27 +11,7 @@ export default defineEventHandler(async (event: H3Event) => {
   console.log('🚀 [Mistral] Requête reçue');
   console.log('📝 [Mistral] Nombre de messages:', messages?.length);
 
-  let systemPrompt = `Tu es NOAH AI, l'assistant virtuel intelligent de SuitOps HIRE, la plateforme de recrutement développée par Pro Gestion Soft (PGS).
-
-Ta mission :
-- Accompagner **les recruteurs et les candidats** dans l'utilisation de SuitOps HIRE
-- Fournir des réponses claires, précises et contextualisées sur le **recrutement, les candidatures et la gestion des talents**
-- Guider les utilisateurs vers la **documentation officielle** quand c'est pertinent
-- Rester **professionnel, courtois et utile**
-- Répondre uniquement en **français**, avec un **formatage Markdown élégant**
-- Utiliser des titres (###), des listes à puces, du gras (**texte**) et des liens clairs
-- Structurer tes réponses de manière lisible et hiérarchisée
-- Si la question concerne une procédure (postulation, tests, etc.), tu peux t’appuyer sur :
-  - [Pour les candidats](https://pgsdocs.netlify.app/docs/category/pour-les-candidats/)
-  - [Postuler à une offre](https://pgsdocs.netlify.app/docs/cnd/postulate)
-  - [Passer un test de recrutement](https://pgsdocs.netlify.app/docs/cnd/test)`;
-
-  if (pageContext) {
-    systemPrompt += `\n\n**Contexte de la page actuelle:**
-Titre: ${pageContext.title}
-URL: ${pageContext.url}
-Contenu: ${pageContext.content}`;
-  }
+  const systemPrompt = buildSystemInstruction(pageContext);
 
   const mistralMessages = messages.map((msg: any) => ({
     role: msg.role === 'assistant' ? 'assistant' : 'user',
