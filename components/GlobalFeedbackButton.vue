@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useChatbotStore } from '@/stores/NoahBot';
-import { IconBrandOpenai, IconHelp, IconCircleChevronUp, IconExternalLink, IconStar, IconBook } from '@tabler/icons-vue';
+import { IconSparkles, IconBrandOpenai, IconHelp, IconCircleChevronUp, IconExternalLink, IconStar, IconBook } from '@tabler/icons-vue';
 
 const showModal = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
