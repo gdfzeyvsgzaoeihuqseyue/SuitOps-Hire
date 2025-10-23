@@ -187,7 +187,7 @@
 import { ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '~/stores/auth'
-import { useJobsStore } from '~/stores/job'
+import { useJobsStore } from '~/stores/offer'
 import { storeToRefs } from 'pinia'
 import { IconBell, IconLayoutDashboard, IconMapPin, IconBuilding, IconThumbUp, IconSettings, IconMenu2, IconMenuDeep } from '@tabler/icons-vue'
 import { useSharedFiles } from '~/stores/sharedFiles';

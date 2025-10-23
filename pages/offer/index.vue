@@ -75,7 +75,7 @@
           <p class="text-gray-500">
             {{ jobsStore.searchQuery
               ? `Nous n'avons trouvé aucune offre correspondant à votre recherche : "${jobsStore.searchQuery}".`
-              : 'Revenez régulièrement pour découvrir nos nouvelles opportunités.' }}
+              : 'Revenez régulièrement pour découvrir de nouvelles opportunités.' }}
           </p>
           <button v-if="jobsStore.searchQuery" @click="jobsStore.searchQuery = ''"
             class="mt-4 text-primary hover:text-secondary font-medium underline">
@@ -253,7 +253,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { storeToRefs } from 'pinia';

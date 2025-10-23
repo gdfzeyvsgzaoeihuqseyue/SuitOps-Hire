@@ -43,10 +43,11 @@
       </div>
 
       <!-- Loading State -->
-      <div v-if="blogStore.isLoading" class="text-center mt-16">
+      <!-- <div v-if="blogStore.isLoading" class="text-center mt-16">
         <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         <p class="mt-4 text-gray-600">Chargement des articles...</p>
-      </div>
+      </div> -->
+      <LogoLoader v-if="blogStore.isLoading" :show-text="true" size="lg" text="Chargement des articles..." />
 
       <!-- Error State -->
       <div v-else-if="blogStore.error" class="text-center mt-16 text-red-600">
@@ -163,6 +164,7 @@ import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { useBlogStore } from '~/stores/blog'
 import { IconEye } from '@tabler/icons-vue'
+import { LogoLoader } from '@/components/utils';
 
 const blogStore = useBlogStore()
 const searchQuery = ref('')

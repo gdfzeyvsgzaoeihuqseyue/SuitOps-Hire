@@ -141,7 +141,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
 import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
 import { useSharedFiles } from '~/stores/sharedFiles';

@@ -258,7 +258,7 @@
 import { computed, ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { IconArrowLeft, IconRefresh, IconMapPin, IconSearch, IconLocation, IconBriefcase, IconMail, IconCalendar, IconUsers, IconArrowRight } from '@tabler/icons-vue';

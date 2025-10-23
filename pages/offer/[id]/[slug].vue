@@ -177,12 +177,10 @@
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { IconArrowLeft, IconLocation, IconCalendar, IconUsers, IconMail, IconArrowRight, IconCircleCheck, IconInfoCircle } from '@tabler/icons-vue';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { ref, computed } from 'vue'; // Import ref and computed
-
-// Import the new modal component
+import { ref, computed } from 'vue'; 
 import JobApplicationModal from '~/components/JobApplicationModal.vue';
 
 const route = useRoute();

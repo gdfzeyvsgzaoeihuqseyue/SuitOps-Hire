@@ -123,7 +123,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed, ref, watch } from 'vue';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch, IconLocation } from '@tabler/icons-vue';
 
@@ -131,7 +131,7 @@ import { IconRefresh, IconSearch, IconLocation } from '@tabler/icons-vue';
 const jobsStore = useJobsStore();
 const { isLoading, error, jobs } = storeToRefs(jobsStore);
 
-// Normalisation des localisations (supprime les détails après la première virgule et nettoie)
+// Normalisation des localisations
 const normalizeLocation = (location: string) => {
   let cleaned = location.trim().split(',')[0].trim();
   // Optionnel: Capitaliser la première lettre de chaque mot pour l'affichage

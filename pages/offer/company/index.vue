@@ -118,7 +118,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { useJobsStore } from '~/stores/job';
+import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch } from '@tabler/icons-vue';
 
