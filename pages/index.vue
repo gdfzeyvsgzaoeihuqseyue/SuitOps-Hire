@@ -22,18 +22,21 @@
           <div class="flex flex-col mt-8 items-center lg:items-start">
             <div class="flex flex-wrap gap-x-4 gap-y-4 items-center justify-center lg:justify-start">
               <NuxtLink to="/offer"
-                class="btnStyle bg-primary text-white hover:bg-secondary focus-visible:outline-primary transform hover:-translate-y-0.5 transition-all duration-200">
+                class="btnStyle bg-primary text-white hover:bg-secondary focus-visible:outline-primary transform hover:-translate-y-0.5 transition-all duration-200 flex item-center">
+                <IconClipboardList class="mr-2" aria-hidden="true" />
                 Voir les offres
               </NuxtLink>
 
               <NuxtLink to="/dashboard"
-                class="btnStyle bg-secondary text-white hover:bg-primary focus-visible:outline-secondary transform hover:-translate-y-0.5 transition-all duration-200">
-                Mon espace candidat <span aria-hidden="true">→</span>
+                class="btnStyle bg-secondary text-white hover:bg-primary focus-visible:outline-secondary transform hover:-translate-y-0.5 transition-all duration-200 flex item-center">
+                <IconUserCircle class="mr-2" aria-hidden="true" />
+                Mon espace candidat
               </NuxtLink>
 
               <a href="https://web.pgs.ctrlengine.com/offers" target="_blank" rel="noopener noreferrer"
-                class="btnStyle inline-block border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors focus-visible:outline-gray-800 transform hover:-translate-y-0.5 duration-200">
+                class="btnStyle border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors focus-visible:outline-gray-800 transform hover:-translate-y-0.5 duration-200 flex item-center">
                 Je suis recruteur
+                <IconBriefcase class="ml-2" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -49,7 +52,8 @@
       </div>
     </section>
 
-    <section v-if="!jobsStore.isLoading && !jobsStore.error && jobsStore.jobs.length > 0" class="bg-gray-50 py-24 sm:py-32">
+    <section v-if="!jobsStore.isLoading && !jobsStore.error && jobsStore.jobs.length > 0"
+      class="bg-gray-50 py-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div v-if="jobsStore.isLoading" class="text-center py-8">
           <p class="text-gray-600">Chargement des statistiques...</p>
@@ -143,7 +147,7 @@
 import { computed, onMounted } from 'vue';
 import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
-import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock } from '@tabler/icons-vue'
+import { IconSearch, IconEyeStar, IconBellStar, IconCircleCheck, IconBolt, IconLock, IconUserCircle, IconClipboardList, IconBriefcase } from '@tabler/icons-vue'
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();

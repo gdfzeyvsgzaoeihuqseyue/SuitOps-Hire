@@ -105,7 +105,7 @@
     </header>
 
     <!-- Notification -->
-    <SiteNotificationManager />
+    <NotificationManager />
 
     <main class="pt-20">
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -114,7 +114,7 @@
     </main>
 
     <AppFooter />
-    <GlobalFeedbackButton />
+    <FeedbackButton />
   </div>
 </template>
 
@@ -122,6 +122,7 @@
 import { IconXboxX, IconMenuDeep, IconX } from '@tabler/icons-vue';
 import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
+import { NotificationManager, FeedbackButton } from '@/components/utils';
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();

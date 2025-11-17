@@ -170,7 +170,7 @@
     </aside>
 
     <!-- Notification -->
-    <SiteNotificationManager />
+    <NotificationManager />
 
     <div class="pt-16 p-4 lg:p-8 transition-all duration-300" :class="[
       isCollapsed ? 'lg:ml-20' : 'lg:ml-64',
@@ -179,7 +179,7 @@
       <slot />
     </div>
     
-    <GlobalFeedbackButton />
+    <FeedbackButton />
   </main>
 </template>
 
@@ -190,6 +190,7 @@ import { useAuthStore } from '~/stores/auth'
 import { useJobsStore } from '~/stores/offer'
 import { storeToRefs } from 'pinia'
 import { IconBell, IconLayoutDashboard, IconMapPin, IconBuilding, IconThumbUp, IconSettings, IconMenu2, IconMenuDeep } from '@tabler/icons-vue'
+import { NotificationManager, FeedbackButton, SocialCustomLink} from '@/components/utils';
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();

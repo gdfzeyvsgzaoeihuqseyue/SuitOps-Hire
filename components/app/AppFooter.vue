@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-6 sm:py-8 mt-8 bg-WtBAct mt-auto border-t">
+  <footer class="py-6 sm:py-8 bg-WtBAct mt-auto border-t">
     <div class="container mx-auto px-4 sm:px-6">
       <div class="flex flex-col lg:flex-row justify-between items-start">
         <!-- Gauche : Info -->
@@ -44,7 +44,7 @@
             <p class="font-mono text-xs sm:text-sm flex items-center">
               par
               <span
-                class="mx-1 sm:mx-2 inline-flex items-center gap-2 px-2 py-1 rounded-full bg-transparent text-xs font-bold p-1 inline-block border border-textClr hover:bg-blue-100 hover:text-primary transition-all">
+                class="mx-1 sm:mx-2 inline-flex items-center gap-2 px-2 py-1 rounded-full bg-transparent text-xs font-bold p-1 border border-textClr hover:bg-blue-100 hover:text-primary transition-all">
                 <!-- Logo PGS -->
                 <div
                   class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-100 overflow-hidden border border-gray-300">
@@ -65,6 +65,7 @@
 <script setup lang="ts">
 import { NuxtLink } from '#components'
 import { useSharedFiles } from '~/stores/sharedFiles';
+import { SocialCustomLink } from '@/components/utils';
 
 const sharedFiles = useSharedFiles();
 

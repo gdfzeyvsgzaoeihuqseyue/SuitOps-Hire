@@ -134,7 +134,7 @@
     </aside>
 
     <!-- Notification -->
-    <SiteNotificationManager />
+    <NotificationManager />
 
     <div class="pt-16 p-4 lg:p-8 transition-all duration-300" :class="[
       isCollapsed ? 'lg:ml-20' : 'lg:ml-64',
@@ -167,7 +167,7 @@
       </div>
     </div>
 
-    <GlobalFeedbackButton />
+    <FeedbackButton />
   </main>
 </template>
 
@@ -177,6 +177,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { IconBell, IconLayoutDashboard, IconBriefcase, IconFiles, IconMenu2, IconMenuDeep, IconSearch } from '@tabler/icons-vue'
 import { useAuthStore } from '~/stores/auth'
 import { useSharedFiles } from '~/stores/sharedFiles';
+import { NotificationManager, FeedbackButton, SocialCustomLink } from '@/components/utils';
 
 const sharedFiles = useSharedFiles();
 const route = useRoute()
