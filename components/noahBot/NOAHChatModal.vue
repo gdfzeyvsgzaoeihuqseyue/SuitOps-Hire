@@ -197,13 +197,19 @@ onMounted(() => {
   chatbotStore.initConversation(window.location.pathname);
   currentSuggestions.value = getRandomSuggestions(3);
   isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  nextTick(() => {
+    scrollToBottom();
+  });
 });
 
 watch(() => chatbotStore.messages.length, (newLength) => {
   if (newLength === 0) {
     currentSuggestions.value = getRandomSuggestions(3);
   }
-  scrollToBottom();
+  setTimeout(() => {
+    scrollToBottom(true);
+  }, 100);
 });
 
 const showToast = (message: string, duration: number = 3000) => {
@@ -257,7 +263,7 @@ const handleSendMessage = async () => {
 
   try {
     await chatbotStore.sendMessage(message);
-    await scrollToBottom();
+    await scrollToBottom(true);
   } catch (error) {
     console.error('Error sending message:', error);
     messageInput.value = message;
@@ -289,10 +295,6 @@ const handleEdit = async (messageId: string, newContent: string) => {
   }
 };
 
-const handleReset = () => {
-  showResetConfirmation.value = true;
-};
-
 const confirmReset = () => {
   showResetConfirmation.value = false;
 
@@ -303,10 +305,18 @@ const confirmReset = () => {
   showToast('Conversation réinitialisée');
 };
 
-const scrollToBottom = async () => {
+const scrollToBottom = async (smooth: boolean = false) => {
   await nextTick();
+
   if (messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+    requestAnimationFrame(() => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTo({
+          top: messagesContainer.value.scrollHeight,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      }
+    });
   }
 };
 </script>
