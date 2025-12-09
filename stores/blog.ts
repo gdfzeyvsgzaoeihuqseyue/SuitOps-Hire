@@ -33,7 +33,7 @@ export const useBlogStore = defineStore('blog', () => {
       if (options?.limit) params.append('limit', options.limit.toString())
       if (options?.authorId) params.append('authorId', options.authorId)
 
-      const response = await fetch(`${config.public.pgsBaseAPI}/blog/article?${params.toString()}`)
+      const response = await fetch(`${config.public.pgsBaseAPI}/public/blog/get-article?${params.toString()}`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -102,7 +102,7 @@ export const useBlogStore = defineStore('blog', () => {
 
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.pgsBaseAPI}/blog/article/${slug}`)
+      const response = await fetch(`${config.public.pgsBaseAPI}/public/blog/get-article/${slug}`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

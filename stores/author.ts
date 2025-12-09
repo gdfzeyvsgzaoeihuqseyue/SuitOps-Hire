@@ -17,7 +17,7 @@ export const useAuthorStore = defineStore('author', () => {
 
     try {
       const config = useRuntimeConfig()
-      const response = await fetch(`${config.public.pgsBaseAPI}/blog/author/${slug}`)
+      const response = await fetch(`${config.public.pgsBaseAPI}/public/blog/get-author/${slug}`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
