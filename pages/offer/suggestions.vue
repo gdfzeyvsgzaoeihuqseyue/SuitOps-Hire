@@ -24,8 +24,7 @@
         <div class="w-full md:w-2/3 lg:w-1/2">
           <div class="relative">
             <IconSearch class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input v-model="jobsStore.searchQuery" type="text"
-              placeholder="Rechercher par poste, entreprise ou lieu..."
+            <input v-model="jobsStore.searchQuery" type="text" placeholder="Rechercher par poste, entreprise ou lieu..."
               class="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
           </div>
         </div>
@@ -56,17 +55,13 @@
     </header>
 
     <!-- États de chargement, d'erreur ou d'absence de données -->
-    <div v-if="isLoading" class="flex justify-center items-center h-64">
-      <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p class="mt-4 text-gray-600">Préparation de vos suggestions...</p>
-      </div>
-    </div>
+    <UtilsLogoLoader v-if="isLoading" :show-text="true" size="lg" text="Préparation de vos suggestions..." />
 
     <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
       <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des suggestions.</p>
       <p class="text-red-600 text-sm">{{ error }}</p>
-      <button @click="refreshSuggestions" class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
+      <button @click="refreshSuggestions"
+        class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
         Réessayer
       </button>
     </div>
@@ -132,7 +127,8 @@
               <IconLocation class="w-4 h-4 mr-1 text-primary" /> {{ job.location }}
             </span>
             <span class="flex items-center">
-              <IconUsers class="w-4 h-4 mr-1 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber !== 1 ? 's' : '' }}
+              <IconUsers class="w-4 h-4 mr-1 text-primary" /> {{ job.placeNumber }} poste{{ job.placeNumber !== 1 ? 's'
+                : '' }}
             </span>
             <span class="flex items-center">
               <IconCalendar class="w-4 h-4 mr-1 text-primary" /> Clôture : {{ formatDate(job.closingDate) }}
@@ -146,7 +142,8 @@
           <div class="flex items-center justify-between mt-4">
             <NuxtLink :to="`/offer/${job.id}/${job.slug}`"
               class="text-primary hover:text-secondary flex items-center gap-1 text-sm font-medium transition-colors">
-              Voir l'offre <IconArrowRight class="w-4 h-4" />
+              Voir l'offre
+              <IconArrowRight class="w-4 h-4" />
             </NuxtLink>
             <span class="text-xs text-gray-500">
               Publié le {{ formatDate(job.createdAt) }}
@@ -179,19 +176,19 @@ const selectedBadge = ref('');
 // Mapping des badges avec des emojis pour une meilleure visibilité
 const badgeEmojis: { [key: string]: string } = {
   'Clôture proche': '⏳',
-  'Plusieurs postes': '🔢', 
-  'Grande entreprise': '🏢', 
-  'Emploi stable': '✅', 
-  'Quiz disponible': '📝', 
+  'Plusieurs postes': '🔢',
+  'Grande entreprise': '🏢',
+  'Emploi stable': '✅',
+  'Quiz disponible': '📝',
   'Urgent': '⚡',
-  'Nouveau': '✨', 
+  'Nouveau': '✨',
 };
 
 // Fonctions pour déterminer les badges
 const isClosingSoon = (job: any) => differenceInDays(new Date(job.closingDate), new Date()) <= 7 && differenceInDays(new Date(job.closingDate), new Date()) > 0;
 const isUrgent = (job: any) => differenceInDays(new Date(job.closingDate), new Date()) <= 3 && differenceInDays(new Date(job.closingDate), new Date()) > 0;
 const hasMultiplePositions = (job: any) => job.placeNumber > 1;
-const isNewJob = (job: any) => differenceInDays(new Date(), new Date(job.createdAt)) <= 7; 
+const isNewJob = (job: any) => differenceInDays(new Date(), new Date(job.createdAt)) <= 7;
 
 // Récupère tous les badges applicables à une offre donnée
 const getJobBadges = (job: any) => {
@@ -330,6 +327,7 @@ useSeoMeta({
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

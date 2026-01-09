@@ -68,7 +68,7 @@
 
     <aside class="fixed top-0 left-0 h-screen bg-white shadow-lg transition-all duration-300 flex flex-col z-50" :class="[
       isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full',
-      'lg:translate-x-0', 
+      'lg:translate-x-0',
       isCollapsed ? 'lg:w-20' : 'lg:w-64',
       'w-64'
     ]">
@@ -192,6 +192,9 @@ const { data: footerData, pending, error } = await useAsyncData<FooterData>(
   () => sharedFiles.getFooterData()
 )
 
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const pgsUrl = computed(() => customData.value?.pgs?.url);
+
 const userInitials = computed(() => {
   if (!user.value) return ''
   return `${user.value.firstName?.charAt(0) || ''}${user.value.lastName?.charAt(0) || ''}`
@@ -237,12 +240,17 @@ const navItems = [
   { path: '/dashboard/documents', label: 'Documents', icon: IconFiles }
 ]
 
-const footerLinks = [
+const footerLinks = computed(() => [
   { name: 'rgpd', label: 'RGPD', path: '#', external: false },
   { name: 'cgu', label: 'CGU', path: '#', external: false },
-  { name: 'blog', label: 'Blog', path: '/blog', external: false },
+  {
+    name: 'blog',
+    label: 'Blog',
+    path: `${pgsUrl.value}/blog?categories=SuitOps,Employabilité,Général`,
+    external: true
+  },
   { name: 'doc', label: 'Documentation', path: 'https://pgsdocs.netlify.app/docs/category/pour-les-candidats', external: true }
-]
+])
 
 // Recherche globale
 const globalSearchQuery = ref('')
@@ -278,9 +286,9 @@ const clearSearch = () => {
 
 // Fermer les menus quand on change de route
 watch(route, () => {
-  closeMobileSidebar() // Ajouté pour fermer la sidebar mobile lors de la navigation
+  closeMobileSidebar()
   closeProfileMenu()
-  clearSearch() // Ajouté pour fermer la modal de recherche
+  clearSearch()
 })
 </script>
 

@@ -148,7 +148,7 @@
 
         <div class="py-3 border-y border-gray-700">
           <p class="font-mono text-xs text-center">
-            par 
+            par
             <span
               class="mx-1 sm:mx-2 inline-flex items-center gap-2 px-2 py-1 rounded-full bg-transparent text-xs font-bold p-1 inline-block border border-textClr hover:bg-blue-100 hover:text-primary transition-all">
               <!-- Logo PGS -->
@@ -178,7 +178,7 @@
     ]">
       <slot />
     </div>
-    
+
     <FeedbackButton />
   </main>
 </template>
@@ -190,7 +190,7 @@ import { useAuthStore } from '~/stores/auth'
 import { useJobsStore } from '~/stores/offer'
 import { storeToRefs } from 'pinia'
 import { IconBell, IconLayoutDashboard, IconMapPin, IconBuilding, IconThumbUp, IconSettings, IconMenu2, IconMenuDeep } from '@tabler/icons-vue'
-import { NotificationManager, FeedbackButton, SocialCustomLink} from '@/components/utils';
+import { NotificationManager, FeedbackButton, SocialCustomLink } from '@/components/utils';
 import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();
@@ -210,6 +210,9 @@ const { data: footerData, pending, error } = await useAsyncData<FooterData>(
   'footerData',
   () => sharedFiles.getFooterData()
 )
+
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const pgsUrl = computed(() => customData.value?.pgs?.url || 'https://progestionsoft.netlify.app/');
 
 const userInitials = computed(() => {
   if (!user.value) return ''
@@ -291,7 +294,6 @@ const getCompanyOffersCount = computed(() => {
   return uniqueCompanyIds.size;
 });
 
-// MODIFICATION ICI : Utilisation de la normalisation pour le compteur de lieux
 const getLocationOffersCount = computed(() => {
   const uniqueLocations = new Set<string>();
   jobs.value.forEach(job => {
@@ -309,17 +311,22 @@ const getLocationOffersCount = computed(() => {
 const navItems = [
   { path: '/offer', label: 'Toutes les offres', icon: IconLayoutDashboard, count: getAllOffersCount },
   { path: '/offer/company', label: 'Entreprises', icon: IconBuilding, count: getCompanyOffersCount },
-  { path: '/offer/location', label: 'Lieux', icon: IconMapPin, count: getLocationOffersCount }, // Mis à jour
+  { path: '/offer/location', label: 'Lieux', icon: IconMapPin, count: getLocationOffersCount },
   { path: '/offer/suggestions', label: 'Recommandations', icon: IconThumbUp },
   { path: '/offer/preference', label: 'Préférences', icon: IconSettings },
 ]
 
-const footerLinks = [
+const footerLinks = computed(() => [
   { name: 'rgpd', label: 'RGPD', path: '#', external: false },
   { name: 'cgu', label: 'CGU', path: '#', external: false },
-  { name: 'blog', label: 'Blog', path: '/blog', external: false },
+  {
+    name: 'blog',
+    label: 'Blog',
+    path: `${pgsUrl.value}/blog?categories=SuitOps,Employabilité,Général`,
+    external: true
+  },
   { name: 'doc', label: 'Documentation', path: 'https://pgsdocs.netlify.app/docs/category/pour-les-candidats', external: true }
-]
+])
 
 const globalSearchQuery = ref('')
 const isSearchModalOpen = ref(false)

@@ -5,8 +5,9 @@ type FooterData = {
   brandUrl: string
 }
 
+type LinkType = { url: string };
 type CustomData = {
-  hire: { url: string }
+  [key: string]: LinkType;
 }
 
 export const useSharedFiles = defineStore('sharedFiles', () => {
@@ -46,7 +47,6 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
     try {
       return await $fetch<FooterData>(paths.data.footer);
     } catch (err) {
-      console.error('Erreur lors du chargement des données footer:', err);
       return {
         brand: 'PGS SARL',
         brandUrl: '#'
@@ -54,10 +54,21 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
     }
   }
 
+    async function getCustomData() {
+    try {
+      return await $fetch<CustomData>(paths.data.custom);
+    } catch (err) {
+      console.error('Erreur lors du chargement des données custom:', err);
+      return new Proxy({}, {
+        get: () => ({ url: '#' })
+      }) as CustomData;
+    }
+  }
+
   async function getBaseUrl() {
     try {
       const customData = await $fetch<CustomData>(paths.data.custom);
-      return customData.hire.url;
+      return customData.suitops?.url || '#';
     } catch (err) {
       console.error('Erreur lors du chargement des données custom:', err);
       return '#';
@@ -67,6 +78,7 @@ export const useSharedFiles = defineStore('sharedFiles', () => {
   return {
     paths,
     getFooterData,
+    getCustomData,
     getBaseUrl
   };
 });

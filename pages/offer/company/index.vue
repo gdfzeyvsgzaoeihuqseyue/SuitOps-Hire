@@ -21,8 +21,7 @@
         <div class="w-full md:w-2/3 lg:w-1/2">
           <div class="relative">
             <IconSearch class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input v-model="jobsStore.searchQuery" type="text"
-              placeholder="Rechercher par nom d'entreprise..."
+            <input v-model="jobsStore.searchQuery" type="text" placeholder="Rechercher par nom d'entreprise..."
               class="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200" />
           </div>
         </div>
@@ -42,17 +41,14 @@
       </div>
     </header>
 
-    <div v-if="isLoading" class="flex justify-center items-center h-64">
-      <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p class="mt-4 text-gray-600">Chargement des entreprises...</p>
-      </div>
-    </div>
+    <!-- Etat de chargement -->
+    <UtilsLogoLoader v-if="isLoading" :show-text="true" size="lg" text="Chargement des entreprises..." />
 
     <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
       <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des entreprises.</p>
       <p class="text-red-600 text-sm">{{ error }}</p>
-      <button @click="refreshCompanies" class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
+      <button @click="refreshCompanies"
+        class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
         Réessayer
       </button>
     </div>
@@ -86,14 +82,17 @@
           :to="`/offer/company/${company.id}/${company.slug}`"
           class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col items-center text-center">
           <img :src="company.logo?.url || `https://api.dicebear.com/7.x/initials/svg?seed=${company.name}`"
-            :alt="`Logo de ${company.name}`" class="w-20 h-20 rounded-full border-2 border-gray-100 object-cover mb-4 flex-shrink-0"
+            :alt="`Logo de ${company.name}`"
+            class="w-20 h-20 rounded-full border-2 border-gray-100 object-cover mb-4 flex-shrink-0"
             @error="handleImageError" />
           <div class="flex-1 min-w-0">
-            <h2 class="text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors truncate mb-1" :title="company.name">
+            <h2 class="text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors truncate mb-1"
+              :title="company.name">
               {{ company.name }}
             </h2>
             <p class="text-gray-600 text-sm">
-              <span class="font-bold text-primary">{{ company.jobCount }}</span> offre{{ company.jobCount !== 1 ? 's' : '' }} disponible{{ company.jobCount !== 1 ? 's' : '' }}
+              <span class="font-bold text-primary">{{ company.jobCount }}</span> offre{{ company.jobCount !== 1 ? 's' :
+                '' }} disponible{{ company.jobCount !== 1 ? 's' : '' }}
             </p>
           </div>
         </NuxtLink>
@@ -122,7 +121,6 @@ import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch } from '@tabler/icons-vue';
 
-// --- Store et Données de base ---
 const jobsStore = useJobsStore();
 const { isLoading, error, jobs } = storeToRefs(jobsStore);
 
@@ -137,7 +135,6 @@ const companies = computed(() => {
       companiesMap.set(company.id, {
         id: company.id,
         name: company.name,
-        // Assure un slug valide, même si non fourni par l'API
         slug: company.slug || company.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
         logo: company.logo,
         jobCount: existing ? existing.jobCount + 1 : 1
@@ -145,7 +142,6 @@ const companies = computed(() => {
     }
   });
 
-  // Convertit la Map en Array et ne garde que les entreprises ayant au moins une offre
   return Array.from(companiesMap.values()).filter(company => company.jobCount > 0);
 });
 
@@ -165,18 +161,18 @@ const filteredCompanies = computed(() => {
 });
 
 const sortedCompanies = computed(() => {
-  const result = [...filteredCompanies.value]; // Crée une copie pour ne pas modifier l'original
+  const result = [...filteredCompanies.value];
   switch (sortOption.value) {
     case 'alpha-asc': return result.sort((a, b) => a.name.localeCompare(b.name));
     case 'alpha-desc': return result.sort((a, b) => b.name.localeCompare(a.name));
-    case 'jobs-desc': return result.sort((a, b) => b.jobCount - a.jobCount); // Plus d'offres en premier
-    case 'jobs-asc': return result.sort((a, b) => a.jobCount - b.jobCount);   // Moins d'offres en premier
-    default: return result; // Tri par défaut (ordre d'arrivée ou défini par l'API)
+    case 'jobs-desc': return result.sort((a, b) => b.jobCount - a.jobCount);
+    case 'jobs-asc': return result.sort((a, b) => a.jobCount - b.jobCount);
+    default: return result;
   }
 });
 
 // --- Pagination ---
-const itemsPerPage = 12; // Augmenté pour un affichage plus dense et harmonieux
+const itemsPerPage = 12;
 const currentPage = ref(1);
 const totalPages = computed(() => Math.ceil(sortedCompanies.value.length / itemsPerPage));
 const paginatedCompanies = computed(() => {
@@ -232,6 +228,7 @@ useSeoMeta({
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

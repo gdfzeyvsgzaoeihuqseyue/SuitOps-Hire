@@ -45,18 +45,14 @@
       </div>
     </header>
 
-    <!-- États de chargement, d'erreur ou d'absence de données -->
-    <div v-if="isLoading" class="flex justify-center items-center h-64">
-      <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p class="mt-4 text-gray-600">Chargement des localisations...</p>
-      </div>
-    </div>
+    <!-- Etat de chargement -->
+    <UtilsLogoLoader v-if="isLoading" :show-text="true" size="lg" text="Chargement des localisations..." />
 
     <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
       <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des localisations.</p>
       <p class="text-red-600 text-sm">{{ error }}</p>
-      <button @click="refreshLocation" class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
+      <button @click="refreshLocation"
+        class="mt-4 text-red-600 hover:text-red-800 font-medium border border-red-600 rounded-md px-4 py-2 hover:bg-red-50 transition-colors">
         Réessayer
       </button>
     </div>
@@ -85,18 +81,20 @@
         {{ sortedLocations.length }} lieu{{ sortedLocations.length > 1 ? 'x' : '' }} avec des offres active{{
           sortedLocations.length > 1 ? 's' : '' }}
       </p>
-      
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <NuxtLink v-for="location in paginatedLocations" :key="location"
           :to="`/offer/location/${encodeURIComponent(location)}`"
           class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.01] flex flex-col items-center text-center">
           <IconLocation class="w-12 h-12 text-primary mb-4 flex-shrink-0" />
           <div class="flex-1 min-w-0">
-            <h2 class="text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors truncate mb-1" :title="location">
+            <h2 class="text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors truncate mb-1"
+              :title="location">
               {{ location }}
             </h2>
             <p class="text-gray-600 text-sm">
-              <span class="font-bold text-primary">{{ jobCounts[location] }}</span> offre{{ jobCounts[location] !== 1 ? 's' : '' }} disponible{{
+              <span class="font-bold text-primary">{{ jobCounts[location] }}</span> offre{{ jobCounts[location] !== 1 ?
+                's' : '' }} disponible{{
                 jobCounts[location] !== 1 ? 's' : '' }}
             </p>
           </div>
@@ -127,29 +125,26 @@ import { useJobsStore } from '~/stores/offer';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch, IconLocation } from '@tabler/icons-vue';
 
-// --- Store et Données de base ---
 const jobsStore = useJobsStore();
 const { isLoading, error, jobs } = storeToRefs(jobsStore);
 
 // Normalisation des localisations
 const normalizeLocation = (location: string) => {
   let cleaned = location.trim().split(',')[0].trim();
-  // Optionnel: Capitaliser la première lettre de chaque mot pour l'affichage
   return cleaned.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
 };
 
 // Extraction des localisations uniques
 const locations = computed(() => {
-  const locationsSet = new Set<string>(); // Utiliser un Set pour garantir l'unicité
+  const locationsSet = new Set<string>();
   jobs.value.forEach(job => {
     if (job.location) {
       const normalized = normalizeLocation(job.location);
-      if (normalized) { // S'assurer que la localisation n'est pas vide après normalisation
+      if (normalized) {
         locationsSet.add(normalized);
       }
     }
   });
-  // Retourne un tableau trié alphabétiquement par défaut pour une meilleure prévisibilité
   return Array.from(locationsSet).sort((a, b) => a.localeCompare(b));
 });
 
@@ -235,6 +230,7 @@ useSeoMeta({
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

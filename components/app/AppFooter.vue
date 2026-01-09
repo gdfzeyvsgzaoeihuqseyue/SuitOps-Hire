@@ -64,14 +64,18 @@
 
 <script setup lang="ts">
 import { NuxtLink } from '#components'
-import { useSharedFiles } from '~/stores/sharedFiles';
 import { SocialCustomLink } from '@/components/utils';
+import { useSharedFiles } from '~/stores/sharedFiles';
 
 const sharedFiles = useSharedFiles();
 
-// Récupérer les données du footer depuis le store
+const { data: customData } = await useAsyncData('customData', () => sharedFiles.getCustomData());
+const pgsUrl = computed(() => customData.value?.pgs?.url);
+
+
+
 type FooterData = { brand: string; brandUrl: string }
-const { data: footerData, pending, error } = await useAsyncData<FooterData>(
+const { data: footerData } = await useAsyncData<FooterData>(
   'footerData',
   () => sharedFiles.getFooterData()
 )
@@ -81,8 +85,8 @@ const navSections: any[] = [
   {
     title: 'Navigation',
     links: [
-      { name: 'Blog', to: '/blog' },
-      { name: 'Réccruter', to: 'https://web-suitops.netlify.app' }
+      { name: 'Blog', to: `${pgsUrl.value}/blog?categories=SuitOps,Employabilité,Général`, external: true },
+      { name: 'Récruter', to: 'https://web-suitops.netlify.app', external: true }
     ]
   },
   {

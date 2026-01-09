@@ -9,8 +9,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const isPublic =
     to.path === '/' ||
     to.path.startsWith('/auth') ||
-    to.path.startsWith('/offer') ||
-    to.path.startsWith('/blog')
+    to.path.startsWith('/offer')
 
   // Redirige les utilisateurs non connectés vers la page de login s’ils accèdent à une page protégée
   if (!isPublic && !isAuthenticated) {

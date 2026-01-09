@@ -50,12 +50,8 @@
         </div>
       </header>
 
-      <div v-if="isLoading" class="flex justify-center items-center h-64">
-        <div class="text-center">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p class="mt-4 text-gray-600">Recherche des offres...</p>
-        </div>
-      </div>
+      <!-- Etat de chargement -->
+      <UtilsLogoLoader v-if="isLoading" :show-text="true" size="lg" text="Chargement des offres..." />
 
       <div v-else-if="error" class="bg-red-50 p-4 rounded-md text-center">
         <p class="text-red-700 font-medium mb-2">Une erreur est survenue lors du chargement des offres.</p>
@@ -258,11 +254,8 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { storeToRefs } from 'pinia';
 import { IconRefresh, IconSearch, IconInfoCircle, IconLocation, IconUsers, IconCalendarX, IconX, IconArrowRight } from '@tabler/icons-vue';
-
-// Import the JobApplicationModal component
 import JobApplicationModal from '~/components/JobApplicationModal.vue';
 
-// --- Store et Données de base ---
 const jobsStore = useJobsStore();
 const { isLoading, error, filteredJobs: storeFilteredJobs, jobs } = storeToRefs(jobsStore);
 
@@ -286,7 +279,7 @@ const sortOption = ref<string>('default');
 
 // The `processedJobs` is the data source after applying filters and sorting
 const processedJobs = computed(() => {
-  let result = storeFilteredJobs.value; // Already filtered by the store's search bar
+  let result = storeFilteredJobs.value;
 
   // Filtering by contract type
   if (selectedContract.value) {
